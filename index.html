@@ -6,6 +6,8 @@
     <!-- <script src="//code.jquery.com/jquery-1.11.2.min.js"></script> -->
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@1,200&display=swap');
+
         * {
             box-sizing: border-box;
         }
@@ -2415,21 +2417,27 @@
 
         .four {
             position: absolute;
-            font-size: 150px;
+            font-size: 110px;
             font-weight: 900;
             text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
             user-select: none;
         }
 
+        .four--0 {
+            top: 0px;
+            left: -180px;
+            z-index: 1;
+        }
+
         .four--1 {
             top: 100px;
-            left: 30px;
+            left: -5px;
             z-index: 1;
         }
 
         .four--2 {
             top: 100px;
-            left: 230px;
+            left: 240px;
             z-index: 3;
         }
 
@@ -2602,16 +2610,19 @@
         }
 
         .planet {
-            background-color: #ff4980;
-            box-shadow: inset -6px -10px 0px 1px #cc3b6b, 0px 2px 10px rgba(0, 0, 0, 0.4);
+            /* background-color: #ff4980;
+            box-shadow: inset -6px -10px 0px 1px #cc3b6b, 0px 2px 10px rgba(0, 0, 0, 0.4); */
+            background-color: #4979ff;
+            box-shadow: inset -6px -10px 0px 1px #3f6ff3, 0px 2px 10px rgba(0, 0, 0, 0.4);
             width: 155px;
             height: 155px;
         }
 
         .craters .crater {
             position: absolute;
-            border-radius: 50%;
-            background-color: #c93667;
+            border-radius: 30%;
+            /* background-color: #c93667; */
+            background-color: #098324;
         }
 
         .craters .crater--1 {
@@ -2673,11 +2684,12 @@
         }
 
         .sorry {
+            font-family: 'Prompt', sans-serif;
             position: absolute;
-            top: 210px;
+            top: 100px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 15px;
+            font-size: 20px;
         }
 
         @-moz-keyframes blink {
@@ -2951,8 +2963,9 @@
     <div class="center">
         <div class="circle circle--outer"></div>
         <div class="circle circle--inner">
-            <div class="four four--1">4</div>
-            <div class="four four--2">4</div>
+            <div class="four four--0">Hello</div>
+            <div class="four four--1">W</div>
+            <div class="four four--2"> RLD</div>
             <div class="circle oh">
                 <div class="astronaut">
                     <div class="astronaut-backpack"></div>
@@ -2975,11 +2988,12 @@
                         <div class="glow glow--2"></div>
                     </div>
                     <div class="astronaut-body"></div>
-                </div><svg class="astronaut-wire" viewBox="-9 -9 259 823" width="259" height="823">
+                </div>
+                <!-- <svg class="astronaut-wire" viewBox="-9 -9 259 823" width="259" height="823">
                     <path
                         d="M241 0c-24 54-30 113-78 148S63 159 27 215c-35 55 32 102 73 141s103 94 98 166c-6 97-169 66-192 157-10 43-8 84 9 126"
                         fill="none" stroke-width="6" stroke="#FFF"></path>
-                </svg>
+                </svg> -->
                 <div class="circle planet">
                     <div class="craters">
                         <div class="crater crater--1"></div>
@@ -3040,12 +3054,12 @@
                 </div>
             </div>
         </div>
-        <div class="sorry">Oops! Sorry, page not found.</div>
+        <div class="sorry">มีข้อสงสัย ติดต่อใน discord</div>
     </div>
     <a class="inspiration" href="https://dribbble.com/shots/4571035-Error-404" target="_blank"
         rel="noopener">inspiration</a>
-    <a class="codepenio" href="https://codepen.io/FilipVitas/pen/KRRRoY" target="_blank" rel="codepen.io">from
-        codepen.io</a>
+    <a class="codepenio" href="https://codepen.io/FilipVitas/pen/KRRRoY" target="_blank" rel="codepen.io">
+        The original: codepen.io</a>
 
 </body>
 
