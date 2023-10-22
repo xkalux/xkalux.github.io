@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script src="//code.jquery.com/jquery-1.11.2.min.js"></script> -->
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@1,200&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@1,200&family=Share+Tech+Mono&display=swap');
 
         * {
             box-sizing: border-box;
@@ -21,6 +31,54 @@
             font-family: 'Open Sans', sans-serif;
             letter-spacing: 0.2px;
             color: #fff;
+
+        }
+
+        a p {
+            text-align: end;
+            margin: 0;
+            font-size: 1.2em;
+            font-family: 'Share Tech Mono', monospace;
+            text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .my-dropdown-menu {
+            color: #d2cee4;
+            background-color: transparent;
+            border: none;
+        }
+
+        .dropdown-item {
+            color: #d9a9df;
+            border: none;
+            margin-right: 20px;
+
+        }
+
+
+        .dropdown-item:hover {
+            color: #fff;
+            background-color: transparent;
+            /* font-size: 1.02em; */
+        }
+
+        .mydropdown {
+            /* font-family: Prompt; */
+            position: fixed;
+            right: 0;
+            color: #d2cee4;
+            border: none;
+            margin: 20px;
+            /* background-color: #098324; */
+        }
+
+        .mydropdown:hover {
+            position: fixed;
+            right: 0;
+            color: #fff;
+            border: none;
+            text-decoration: none;
+            /* background-color: #098324; */
         }
 
         .codepenio {
@@ -2877,6 +2935,23 @@
 </head>
 
 <body>
+
+    <div class="dropdown ">
+        <a class=" dropdown-toggle mydropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="false" aria-expanded="false" style="font-size: 1.5em;">
+            Slides
+        </a>
+
+        <div class="dropdown-menu my-dropdown-menu " aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="https://x-kalux.github.io/slidev/datastructures_and_algorithms/">
+                <p>DataStructures and Algorithms</p>
+            </a>
+            <a class="dropdown-item" href="https://x-kalux.github.io/slidev/dotnet_and_angular/">
+                <p>Internet
+                    Programming</p>
+            </a>
+        </div>
+    </div>
 
     <div class="stars">
         <div class="star"></div>
