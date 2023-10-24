@@ -42,10 +42,21 @@
             text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
         }
 
+        .dropdown:hover .my-dropdown-menu {
+            display: block;
+            /* position: fixed; */
+            right: -5;
+            margin-top: 40px;
+            opacity: 1;
+
+        }
+
         .my-dropdown-menu {
             color: #d2cee4;
             background-color: transparent;
             border: none;
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
         }
 
         .dropdown-item {
@@ -54,7 +65,6 @@
             margin-right: 20px;
 
         }
-
 
         .dropdown-item:hover {
             color: #fff;
@@ -70,6 +80,7 @@
             border: none;
             margin: 20px;
             /* background-color: #098324; */
+            text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .mydropdown:hover {
@@ -80,6 +91,8 @@
             text-decoration: none;
             /* background-color: #098324; */
         }
+
+
 
         .codepenio {
             position: fixed;
@@ -2482,14 +2495,15 @@
         }
 
         .four--0 {
-            top: 0px;
-            left: -180px;
+            top: 30px;
+            left: -130px;
+            font-size: 90px;
             z-index: 1;
         }
 
         .four--1 {
             top: 100px;
-            left: -5px;
+            left: 0px;
             z-index: 1;
         }
 
@@ -2909,25 +2923,30 @@
   Link: https://dribbble.com/shots/4571035-Error-404
 */
 
-        let oh = document.querySelector('.circle.oh')
+        $(document).ready(function () {
+            let oh = document.querySelector('.circle.oh')
 
-        document.addEventListener('mousemove', event => {
-            let domainX = [0, document.body.clientWidth],
-                domainY = [0, document.body.clientHeight],
-                range = [-10, 10]
+            document.addEventListener('mousemove', event => {
+                let domainX = [0, document.body.clientWidth],
+                    domainY = [0, document.body.clientHeight],
+                    range = [-10, 10]
 
-            let translate = {
-                x: range[0] + (event.clientX - domainX[0]) * (range[1] - range[0]) / (domainX[1] - domainX[0]),
-                y: range[0] + (event.clientY - domainY[0]) * (range[1] - range[0]) / (domainY[1] - domainY[0])
-            }
+                let translate = {
+                    x: range[0] + (event.clientX - domainX[0]) * (range[1] - range[0]) / (domainX[1] - domainX[0]),
+                    y: range[0] + (event.clientY - domainY[0]) * (range[1] - range[0]) / (domainY[1] - domainY[0])
+                }
 
-            // oh.style.animation = 'none'
-            // oh.style.transform = `translate(${translate.x}px, ${translate.y}px)`
-        })
+                oh.style.animation = 'none'
+                oh.style.transform = `translate(${translate.x}px, ${translate.y}px)`
+            })
 
-        // document.addEventListener('mouseleave', event => {
-        //     oh.style.animation = 'floating 3s linear infinite'
-        // })
+            document.addEventListener('mouseleave', event => {
+                oh.style.animation = 'floating 3s linear infinite'
+            })
+
+        });
+
+
 
     </script>
 
@@ -2936,17 +2955,17 @@
 
 <body>
 
-    <div class="dropdown ">
-        <a class=" dropdown-toggle mydropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-            aria-haspopup="false" aria-expanded="false" style="font-size: 1.5em;">
+    <div class="dropdown">
+        <a class=" dropdown-togglex mydropdown" href="#" data-toggle="dropdownx" aria-haspopup="false"
+            aria-expanded="false" style="font-size: 1.5em;">
             Slides
         </a>
 
         <div class="dropdown-menu my-dropdown-menu " aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="https://x-kalux.github.io/slidev/datastructures_and_algorithms/">
+            <a class="dropdown-item" href="https://xkalux.github.io/slidev/datastructures_and_algorithms/">
                 <p>DataStructures and Algorithms</p>
             </a>
-            <a class="dropdown-item" href="https://x-kalux.github.io/slidev/dotnet_and_angular/">
+            <a class="dropdown-item" href="https://xkalux.github.io/slidev/dotnet_and_angular/">
                 <p>Internet
                     Programming</p>
             </a>
