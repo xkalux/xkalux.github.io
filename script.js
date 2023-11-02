@@ -1,9 +1,6 @@
 $(document).ready(function () {
     $("#loading").hide()
     // $("#world").hide()
-    window.onpopstate = function (event) {
-        $("#loading").hide()
-    }
 })
 
 function showLoading() {

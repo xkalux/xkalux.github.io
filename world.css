@@ -4,22 +4,21 @@
     overflow: hidden;
     font-size: 12px;
     background-image: linear-gradient(to right bottom, #a9347e, #4b32a7);
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Prompt', 'Open Sans', sans-serif;
     letter-spacing: 0.2px;
     color: #fff;
 
 }
 
 .codepenio {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     padding: 1cqb;
-    text-align: center;
-    text-decoration: none;
     font-family: 'Gill Sans', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     color: #ff487f;
+    z-index: 100;
 }
 
 .inspiration {
