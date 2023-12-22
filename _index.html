@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Asteroids</title>
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"> -->
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Prompt:ital,wght@1,200&family=Share+Tech+Mono&display=swap&family=Prompt&display=swap');
+	</style>
+	<link rel="stylesheet" href="./asteroids.css">
+</head>
+
+<body>
+	<!-- partial:index.partial.html -->
+	<div class="b-panel">
+		Score:
+		<span id="g-score">0</span>
+		<!-- <div class="b-panel_right">
+			Change color:
+			<label><input onclick="ChangeGameColor(1)" type="radio" name="color" />Red</label>
+			<label><input onclick="ChangeGameColor(0)" type="radio" checked="checked" name="color" />Green</label>
+			<label><input onclick="ChangeGameColor(2)" type="radio" name="color" />Blue</label>
+		</div> -->
+	</div>
+	<canvas id="g-game"></canvas>
+	<div id="g-endgame" class="b-msgbox">
+		<div id="g-leaderboard"></div>
+		<button class="b-button" onclick="SaveScore(game.score,this)">Save score</button>
+		<button class="b-button" onclick="(function(){window.location.href = window.location.pathname})()">New
+			game</button>
+	</div>
+
+	<div id="joyDivLeft" class="joyLeft"></div>
+	<div id="joyDivRight" class="joyRight"></div>
+
+	<div class="base-on">Based on :
+		<a href="https://codepen.io/aann/pen/rawvJe" target="_blank" rel="codepen.io">
+			Asteroids by Artem N</a>
+	</div>
+
+	<!-- partial -->
+	<script src="./joy.js"></script>
+	<script src="./asteroids.js"></script>
+
+</body>
+
+</html>
