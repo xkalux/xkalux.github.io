@@ -1,11 +1,16 @@
 /* Styles */
 body {
   font: normal 16px/16px 'Prompt', monospace;
-
+  color: rgba(255, 255, 255, .8);
+  text-shadow: 0px 0px 5px #0d0;
 }
 
 .b-panel {
-  padding: 16px;
+  padding: 15px;
+  font-size: 1.1em;
+  color: #fff;
+  /* color: rgba(255, 255, 255, .7); */
+  text-shadow: 0px 0px 5px #0d0;
 }
 
 .b-panel_right {
@@ -35,6 +40,8 @@ body {
 .b-scores {
   list-style: decimal outside;
   padding-left: 32px;
+  color: rgba(255, 255, 255, .7);
+  text-shadow: 0px 0px 5px #0d0;
 }
 
 .b-scores__input {
@@ -46,6 +53,7 @@ body {
   padding: 8px;
   margin: 16px 0;
   outline: 0;
+  text-shadow: 0px 0px 5px #0d0;
 }
 
 .b-button:hover,
@@ -57,7 +65,8 @@ body {
 /* Modifiers */
 .m-green {
   background: #010;
-  color: #0F0;
+  /* color: #0F0; */
+  color: rgba(255, 255, 255, .7);
   text-shadow: 0px 0px 5px #0d0;
 }
 
@@ -69,9 +78,10 @@ body {
 .m-green .b-button {
   font: normal 16px/16px 'Prompt', monospace;
   background: #010;
-  color: #0F0;
+  /* color: #0F0; */
+  color: rgba(255, 255, 255, .7);
   text-shadow: 0px 0px 5px #0d0;
-  border: 1px solid #0F0;
+  border: 1px solid rgb(85, 131, 85);
 }
 
 .m-blue {
@@ -114,16 +124,16 @@ body {
 
 
 .joyLeft {
-  width: 150px;
-  height: 150px;
+  width: 110px;
+  height: 110px;
   position: fixed;
   bottom: 100px;
   left: 50px;
 }
 
 .joyRight {
-  width: 150px;
-  height: 150px;
+  width: 110px;
+  height: 110px;
   position: fixed;
   bottom: 100px;
   right: 50px;
@@ -132,10 +142,15 @@ body {
 .base-on {
   font-size: 12px;
   position: fixed;
-  bottom: 1px;
-  left: 10px;
+  bottom: 10px;
+  right: 10px;
+  color: rgba(255, 255, 255, .55);
+  text-shadow: 0px 0px 5px #0d0;
 }
 
 .base-on a {
-  color: #d9a9df;
+  margin-left: 10px;
+  /* color: #effaf6; */
+  color: rgba(255, 255, 255, .7);
+  text-decoration: none;
 }
