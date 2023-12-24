@@ -1,9 +1,21 @@
 h5 {
-    color: #ccc;
+    /* color: #ccc; */
     margin: 0;
-    font: .8em verdana;
+    font: 1em Prompt;
     text-transform: uppercase;
     letter-spacing: .1em;
+}
+
+.loading {
+    /* position: absolute;
+    left: calc(50% - 320px); */
+    z-index: 99;
+    padding: 20px;
+    border-radius: .6em;
+    background-color: rgba(44, 77, 41, 0.2);
+    margin-top: 70px;
+    margin-left: 70px;
+    margin-right: 70px;
 }
 
 .loading span {
