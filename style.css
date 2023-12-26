@@ -179,3 +179,10 @@ svg {
 #hamburger-icon {
     margin-top: 10px;
 }
+
+.audio {
+    position: absolute;
+    margin-left: 30px;
+    margin-top: 70px;
+    display: flex;
+}

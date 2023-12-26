@@ -27,8 +27,9 @@ var cameraPosGameOver = 260
 var monsterAcceleration = 0.004
 var malusClearColor = 0xb44b39
 var malusClearAlpha = 0
-var audio = new Audio(' _Antonio-Vivaldi-Summer_01.mp3')
-
+// var audio = new Audio('https://xkalux.github.io/_Antonio-Vivaldi-Summer_01.mp3')
+// audio.play()
+// console.log(audio.muted)
 var fieldGameOver, fieldDistance
 
 //SCREEN & MOUSE VARIABLES
@@ -1291,7 +1292,7 @@ function resetGame() {
   gameStatus = "play"
   hero.status = "running"
   hero.nod()
-  audio.play()
+  // audio.play()
   updateLevel()
   levelInterval = setInterval(updateLevel, levelUpdateFreq)
 }
