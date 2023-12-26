@@ -1,123 +1,182 @@
-.base-on {
-    color: azure;
-    font-size: 12px;
-    position: fixed;
-    bottom: 10px;
-    /* right: 10px; */
-}
-
-.base-on a {
-    color: #fff;
-    margin-left: 10px;
-    text-decoration: none;
-}
-
-.game-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-canvas {
-    z-index: -1;
-}
-
-nav {
-    z-index: 100;
-}
-
-#game {
-    font: normal 16px/16px 'Consolas', monospace;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    width: 100%;
-    height: calc(100% - 50px);
-    min-width: 320px;
-    min-height: 240px;
-}
-
-#score {
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    font-size: 2em;
-    font-weight: 900;
-    font-family: 'Prompt';
-    color: #1B4242;
-}
-
-#scoreboard {
-    position: absolute;
-    top: 100px;
-    /* width: 320px; */
-    min-width: 320px;
-    font-family: "Prompt";
-    /* align-content: center; */
+#leaderboard {
+    position: sticky;
+    margin-top: 25px;
+    left: 50%;
     color: #005B41;
     font-size: 1.2rem;
 }
 
-.b-scores {
-    align-content: center;
+#leaderboard .b-scores {
+    text-transform: none;
     height: 200px;
     min-height: 110px;
-    /* Adjust as needed */
     font-size: 1rem;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-.b-scores-name-text {
-    margin-top: 5px;
-    color: #116D6E;
-    border-bottom: 1px solid #5C8374;
-}
-
-.b-scores-score-text {
-    margin-top: 5px;
+#top3 {
+    position: absolute;
+    font-family: Voltaire;
+    letter-spacing: 2px;
+    color: #b9630d;
+    right: -30px;
+    top: 30px;
+    transform: translate(-50%, 0%);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     text-align: end;
-    margin-right: 25px;
-    color: #116D6E;
-    border-bottom: 1px solid #5C8374;
 }
 
-#introduction {
-    position: absolute;
-    top: 50%;
-    /* width: 200px;
-    height: 150px; */
-    font-weight: 600;
-    font-size: 0.8em;
-    font-family: "Prompt";
-    /* text-align: center; */
-    transition: opacity 2s;
-    color: #1B4242;
+#top3-list {
+    font-size: 0.9em;
+    margin-top: 5px;
+    text-align: start;
+    font-family: Prompt;
 }
 
-#restart {
-    /* top: 200px;
-    position: absolute; */
+.top3-item {
+    margin-bottom: 3px;
+    color: #ca6702;
+    font-size: 1em;
+    margin-top: 5px;
+}
+
+svg {
+    size: 2px;
+}
+
+.b-scores .row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.b-scores .col {
+    flex: 1;
+
+}
+
+
+.b-scores .underline {
+    border-bottom: 1px solid #97c2b2;
+}
+
+.b-scores .text-start {
+    text-align: start;
     margin-top: 10px;
-    position: absolute;
-    left: calc(50% - 60px);
-    width: 120px;
-    height: 120px;
-    text-align: center;
-    border-radius: 50%;
-    color: white;
-    background-color: red;
-    border: none;
-    font-weight: 700;
-    font-size: 1.2em;
-    font-family: "Prompt";
-    display: none;
-    cursor: pointer;
+    margin-bottom: 2.5px;
+    margin-left: 25px;
+    color: #54ad76;
+    font-family: Prompt;
 }
 
-#perfect {
-    position: absolute;
-    opacity: 0;
-    transition: opacity 2s;
+.b-scores .text-end {
+    text-align: end;
+    margin-top: 10px;
+    margin-bottom: 2.5px;
+    margin-right: 25px;
+    color: #54ad76;
+    font-family: Prompt;
+}
+
+.input {
+    border: 2px solid transparent;
+    width: 15em;
+    height: 2.5em;
+    padding-left: 0.8em;
+    outline: none;
+    overflow: hidden;
+    background-color: #F3F3F3;
+    border-radius: 0.25rem;
+    transition: all 0.25s;
+    font-size: 1rem;
+    font-family: Prompt;
+    letter-spacing: 1px;
+}
+
+.input:hover,
+.input:focus {
+    border: 2px solid #4A9DEC;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+    background-color: white;
+}
+
+.button {
+    color: white;
+    background-color: #1c5d9b;
+    height: 3em;
+    font-weight: 500;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    line-height: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    text-align: center;
+    /* margin-right: 0.5rem; */
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    font-family: Prompt;
+}
+
+.button:hover,
+.button:focus {
+    transition: all 0.25s;
+    background-color: #5b9cda;
+    border: 2px solid #4A9DEC;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+}
+
+.menu div {
+    color: #208064;
+    font-size: 1.2rem;
+    padding-top: 5px;
+}
+
+.menu div:hover {
+    color: #023b2b;
+    transition: all 0.25s;
+}
+
+.menu div ul li {
+    font-size: 1rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    padding: 5px;
+}
+
+.menu div ul li:hover {
+    transition: all 0.25s;
+    background-color: rgb(55, 81, 57, 10%);
+    /* border: 2px solid #4A9DEC; */
+    box-shadow: 0px 0px 0px 7px rgb(55, 81, 57, 10%);
+    border-radius: 0.1rem;
+}
+
+.menu div ul li a:hover {
+    transition: all 0.25s;
+    color: #344e41;
+    text-decoration: none;
+    margin-left: -5px;
+    font-weight: 900;
+}
+
+.menu div ul li a {
+    color: #3a5a40;
+    padding-left: 10px;
+    display: block;
+    width: 100%;
+}
+
+.blur {
+    filter: blur(3px);
+}
+
+#hamburger-icon {
+    margin-top: 10px;
 }

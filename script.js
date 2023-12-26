@@ -1,575 +1,50 @@
-/*
-
-
-
-If you want to know how this game was made, check out this video, that explains how it's made: 
-
-https://youtu.be/eue3UdFvwPo
-
-Follow me on twitter for more: https://twitter.com/HunorBorbely
-
-*/
-
-// Extend the base functionality of JavaScript
-Array.prototype.last = function () {
-    return this[this.length - 1]
-}
-
-// A sinus function that acceps degrees instead of radians
-Math.sinus = function (degree) {
-    return Math.sin((degree / 180) * Math.PI)
-}
-
-// Game data
-let phase = "waiting" // waiting | stretching | turning | walking | transitioning | falling
-let lastTimestamp // The timestamp of the previous requestAnimationFrame cycle
-
-let heroX // Changes when moving forward
-let heroY // Only changes when falling
-let sceneOffset // Moves the whole game
-
-let platforms = []
-let sticks = []
-let trees = []
-
-let score = 0
-let player_name = ''
-
-// Configuration
-const canvasWidth = 375
-const canvasHeight = 375
-const platformHeight = 100
-const heroDistanceFromEdge = 10 // While waiting
-const paddingX = 100 // The waiting position of the hero in from the original canvas size
-const perfectAreaSize = 10
-
-// The background moves slower than the hero
-const backgroundSpeedMultiplier = 0.2
-
-const hill1BaseHeight = 100
-const hill1Amplitude = 10
-const hill1Stretch = 1
-const hill2BaseHeight = 70
-const hill2Amplitude = 20
-const hill2Stretch = 0.5
-
-const stretchingSpeed = 4 // Milliseconds it takes to draw a pixel
-const turningSpeed = 4 // Milliseconds it takes to turn a degree
-const walkingSpeed = 4
-const transitioningSpeed = 2
-const fallingSpeed = 2
-
-const heroWidth = 17 // 24
-const heroHeight = 30 // 40
-
-const canvas = document.getElementById("game")
-canvas.width = window.innerWidth // Make the Canvas full screen
-canvas.height = window.innerHeight
-
-const ctx = canvas.getContext("2d")
-
-const introductionElement = document.getElementById("introduction")
-const perfectElement = document.getElementById("perfect")
-const restartButton = document.getElementById("restart")
-const scoreElement = document.getElementById("score")
-const scoreBoard = document.getElementById("scoreboard")
-
-// Initialize layout
-resetGame()
-
-// Resets game variables and layouts but does not start the game (game starts on keypress)
-function resetGame() {
-    // Reset game progress
-    phase = "waiting"
-    lastTimestamp = undefined
-    sceneOffset = 0
-    score = 0
-
-    introductionElement.style.opacity = 1
-    perfectElement.style.opacity = 0
-    restartButton.style.display = "none"
-    scoreBoard.style.visibility = "hidden"
-    scoreElement.innerText = score
-
-    // The first platform is always the same
-    // x + w has to match paddingX
-    platforms = [{ x: 50, w: 50 }]
-    generatePlatform()
-    generatePlatform()
-    generatePlatform()
-    generatePlatform()
-
-    sticks = [{ x: platforms[0].x + platforms[0].w, length: 0, rotation: 0 }]
-
-    trees = []
-    generateTree()
-    generateTree()
-    generateTree()
-    generateTree()
-    generateTree()
-    generateTree()
-    generateTree()
-    generateTree()
-    generateTree()
-    generateTree()
-
-    heroX = platforms[0].x + platforms[0].w - heroDistanceFromEdge
-    heroY = 0
-
-    draw()
-}
-
-function generateTree() {
-    const minimumGap = 30
-    const maximumGap = 150
-
-    // X coordinate of the right edge of the furthest tree
-    const lastTree = trees[trees.length - 1]
-    let furthestX = lastTree ? lastTree.x : 0
-
-    const x =
-        furthestX +
-        minimumGap +
-        Math.floor(Math.random() * (maximumGap - minimumGap))
-
-    const treeColors = ["#6D8821", "#8FAC34", "#98B333"]
-    const color = treeColors[Math.floor(Math.random() * 3)]
-
-    trees.push({ x, color })
-}
-
-function generatePlatform() {
-    const minimumGap = 40
-    const maximumGap = 200
-    const minimumWidth = 20
-    const maximumWidth = 100
-
-    // X coordinate of the right edge of the furthest platform
-    const lastPlatform = platforms[platforms.length - 1]
-    let furthestX = lastPlatform.x + lastPlatform.w
-
-    const x =
-        furthestX +
-        minimumGap +
-        Math.floor(Math.random() * (maximumGap - minimumGap))
-    const w =
-        minimumWidth + Math.floor(Math.random() * (maximumWidth - minimumWidth))
-
-    platforms.push({ x, w })
-}
-
-resetGame()
-
-// If Escape was pressed restart the game
-window.addEventListener("keydown", function (event) {
-    if (event.key == "Escape") {
-        event.preventDefault()
-        resetGame()
-        return
-    }
-})
-
-window.addEventListener("keydown", function (event) {
-    if (event.key == " ") {
-        return handleGameMousedown()
-    }
-})
-window.addEventListener("keyup", function (event) {
-    if (event.key == " ") {
-        return handleGameMouseup()
-    }
-})
-
-function handleGameMousedown(event) {
-    if (phase == "waiting") {
-        lastTimestamp = undefined
-        introductionElement.style.opacity = 0
-        phase = "stretching"
-        window.requestAnimationFrame(animate)
-    }
-}
-window.addEventListener("mousedown", handleGameMousedown)
-window.addEventListener("touchstart", handleGameMousedown)
-// window.addEventListener("mousedown", function (event) {
-//     if (phase == "waiting") {
-//         lastTimestamp = undefined
-//         introductionElement.style.opacity = 0
-//         phase = "stretching"
-//         window.requestAnimationFrame(animate)
-//     }
-// })
-
-function handleGameMouseup(event) {
-    if (phase == "stretching") {
-        phase = "turning"
-    }
-}
-window.addEventListener("mouseup", handleGameMouseup)
-window.addEventListener("touchend", handleGameMouseup)
-// window.addEventListener("mouseup", function (event) {
-//     if (phase == "stretching") {
-//         phase = "turning"
-//     }
-// })
-
-window.addEventListener("resize", function (event) {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-    draw()
-})
-
-window.requestAnimationFrame(animate)
-
-// The main game loop
-function animate(timestamp) {
-    if (!lastTimestamp) {
-        lastTimestamp = timestamp
-        window.requestAnimationFrame(animate)
-        return
-    }
-
-    switch (phase) {
-        case "waiting":
-            return // Stop the loop
-        case "stretching": {
-            sticks.last().length += (timestamp - lastTimestamp) / stretchingSpeed
-            break
-        }
-        case "turning": {
-            sticks.last().rotation += (timestamp - lastTimestamp) / turningSpeed
-
-            if (sticks.last().rotation > 90) {
-                sticks.last().rotation = 90
-
-                const [nextPlatform, perfectHit] = thePlatformTheStickHits()
-                if (nextPlatform) {
-                    // Increase score
-                    score += perfectHit ? 2 : 1
-                    scoreElement.innerText = score
-
-                    if (perfectHit) {
-                        perfectElement.style.opacity = 1
-                        setTimeout(() => (perfectElement.style.opacity = 0), 1000)
-                    }
-
-                    generatePlatform()
-                    generateTree()
-                    generateTree()
-                }
-
-                phase = "walking"
-            }
-            break
-        }
-        case "walking": {
-            heroX += (timestamp - lastTimestamp) / walkingSpeed
-
-            const [nextPlatform] = thePlatformTheStickHits()
-            if (nextPlatform) {
-                // If hero will reach another platform then limit it's position at it's edge
-                const maxHeroX = nextPlatform.x + nextPlatform.w - heroDistanceFromEdge
-                if (heroX > maxHeroX) {
-                    heroX = maxHeroX
-                    phase = "transitioning"
-                }
-            } else {
-                // If hero won't reach another platform then limit it's position at the end of the pole
-                const maxHeroX = sticks.last().x + sticks.last().length + heroWidth
-                if (heroX > maxHeroX) {
-                    heroX = maxHeroX
-                    phase = "falling"
-                }
-            }
-            break
-        }
-        case "transitioning": {
-            sceneOffset += (timestamp - lastTimestamp) / transitioningSpeed
-
-            const [nextPlatform] = thePlatformTheStickHits()
-            if (sceneOffset > nextPlatform.x + nextPlatform.w - paddingX) {
-                // Add the next step
-                sticks.push({
-                    x: nextPlatform.x + nextPlatform.w,
-                    length: 0,
-                    rotation: 0
-                })
-                phase = "waiting"
-            }
-            break
-        }
-        case "falling": {
-            if (sticks.last().rotation < 180)
-                sticks.last().rotation += (timestamp - lastTimestamp) / turningSpeed
-
-            heroY += (timestamp - lastTimestamp) / fallingSpeed
-            const maxHeroY =
-                platformHeight + 100 + (window.innerHeight - canvasHeight) / 2
-            if (heroY > maxHeroY) {
-                restartButton.style.display = "block"
-                EngGameMessage("#leaderboard", score)
-                scoreBoard.style.visibility = "visible"
-                return
-            }
-            break
-        }
-        default:
-            throw Error("Wrong phase")
-    }
-
-    draw()
-    window.requestAnimationFrame(animate)
-
-    lastTimestamp = timestamp
-}
-
-// Returns the platform the stick hit (if it didn't hit any stick then return undefined)
-function thePlatformTheStickHits() {
-    if (sticks.last().rotation != 90)
-        throw Error(`Stick is ${sticks.last().rotation}°`)
-    const stickFarX = sticks.last().x + sticks.last().length
-
-    const platformTheStickHits = platforms.find(
-        (platform) => platform.x < stickFarX && stickFarX < platform.x + platform.w
-    )
-
-    // If the stick hits the perfect area
-    if (
-        platformTheStickHits &&
-        platformTheStickHits.x + platformTheStickHits.w / 2 - perfectAreaSize / 2 <
-        stickFarX &&
-        stickFarX <
-        platformTheStickHits.x + platformTheStickHits.w / 2 + perfectAreaSize / 2
-    )
-        return [platformTheStickHits, true]
-
-    return [platformTheStickHits, false]
-}
-
-function draw() {
-    ctx.save()
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
-
-    drawBackground()
-
-    // Center main canvas area to the middle of the screen
-    ctx.translate(
-        (window.innerWidth - canvasWidth) / 2 - sceneOffset,
-        (window.innerHeight - canvasHeight) / 2
-    )
-
-    // Draw scene
-    drawPlatforms()
-    drawHero()
-    drawSticks()
-
-    // Restore transformation
-    ctx.restore()
-}
-
-restartButton.addEventListener("click", function (event) {
-    event.preventDefault()
-    resetGame()
-    restartButton.style.display = "none"
-})
-
-function drawPlatforms() {
-    platforms.forEach(({ x, w }) => {
-        // Draw platform
-        ctx.fillStyle = "#3A4D39"
-        ctx.fillRect(
-            x,
-            canvasHeight - platformHeight,
-            w,
-            platformHeight + (window.innerHeight - canvasHeight) / 2
-        )
-
-        // Draw perfect area only if hero did not yet reach the platform
-        if (sticks.last().x < x) {
-            ctx.fillStyle = "#739072"
-            ctx.fillRect(
-                x + w / 2 - perfectAreaSize / 2,
-                canvasHeight - platformHeight,
-                perfectAreaSize,
-                perfectAreaSize
-            )
-        }
-    })
-}
-
-function drawHero() {
-    ctx.save()
-    ctx.fillStyle = "#331D2C"
-    ctx.translate(
-        heroX - heroWidth / 2,
-        heroY + canvasHeight - platformHeight - heroHeight / 2
-    )
-
-    // Body
-    drawRoundedRect(
-        -heroWidth / 2,
-        -heroHeight / 2,
-        heroWidth,
-        heroHeight - 4,
-        5
-    )
-
-    // Legs
-    const legDistance = 5
-    ctx.beginPath()
-    ctx.arc(legDistance, 11.5, 3, 0, Math.PI * 2, false)
-    ctx.fill()
-    ctx.beginPath()
-    ctx.arc(-legDistance, 11.5, 3, 0, Math.PI * 2, false)
-    ctx.fill()
-
-    // Eye
-    ctx.beginPath()
-    ctx.fillStyle = "white"
-    ctx.arc(5, -7, 3, 0, Math.PI * 2, false)
-    ctx.fill()
-
-    // Band
-    ctx.fillStyle = "#A78295"
-    ctx.fillRect(-heroWidth / 2 - 1, -12, heroWidth + 2, 4.5)
-    ctx.beginPath()
-    ctx.moveTo(-9, -14.5)
-    ctx.lineTo(-17, -18.5)
-    ctx.lineTo(-14, -8.5)
-    ctx.fill()
-    ctx.beginPath()
-    ctx.moveTo(-10, -10.5)
-    ctx.lineTo(-15, -3.5)
-    ctx.lineTo(-5, -7)
-    ctx.fill()
-
-    ctx.restore()
-}
-
-function drawRoundedRect(x, y, width, height, radius) {
-    ctx.beginPath()
-    ctx.moveTo(x, y + radius)
-    ctx.lineTo(x, y + height - radius)
-    ctx.arcTo(x, y + height, x + radius, y + height, radius)
-    ctx.lineTo(x + width - radius, y + height)
-    ctx.arcTo(x + width, y + height, x + width, y + height - radius, radius)
-    ctx.lineTo(x + width, y + radius)
-    ctx.arcTo(x + width, y, x + width - radius, y, radius)
-    ctx.lineTo(x + radius, y)
-    ctx.arcTo(x, y, x, y + radius, radius)
-    ctx.fill()
-}
-
-function drawSticks() {
-    sticks.forEach((stick) => {
-        ctx.save()
-
-        // Move the anchor point to the start of the stick and rotate
-        ctx.translate(stick.x, canvasHeight - platformHeight)
-        ctx.rotate((Math.PI / 180) * stick.rotation)
-
-        // Draw stick
-
-        ctx.beginPath()
-        ctx.lineWidth = 2
-        ctx.strokeStyle = "#3D0C11"
-        ctx.moveTo(0, 0)
-        ctx.lineTo(0, -stick.length)
-        ctx.stroke()
-
-        // Restore transformations
-        ctx.restore()
-    })
-}
-
-function drawBackground() {
-    // Draw sky
-    var gradient = ctx.createLinearGradient(0, 0, 0, window.innerHeight)
-    gradient.addColorStop(0, "#BBD691")
-    gradient.addColorStop(1, "#FEF1E1")
-    ctx.fillStyle = gradient
-    ctx.fillRect(0, 0, window.innerWidth, window.innerHeight)
-
-    // Draw hills
-    drawHill(hill1BaseHeight, hill1Amplitude, hill1Stretch, "#95C629")
-    drawHill(hill2BaseHeight, hill2Amplitude, hill2Stretch, "#659F1C")
-
-    // Draw trees
-    trees.forEach((tree) => drawTree(tree.x, tree.color))
-}
-
-// A hill is a shape under a stretched out sinus wave
-function drawHill(baseHeight, amplitude, stretch, color) {
-    ctx.beginPath()
-    ctx.moveTo(0, window.innerHeight)
-    ctx.lineTo(0, getHillY(0, baseHeight, amplitude, stretch))
-    for (let i = 0; i < window.innerWidth; i++) {
-        ctx.lineTo(i, getHillY(i, baseHeight, amplitude, stretch))
-    }
-    ctx.lineTo(window.innerWidth, window.innerHeight)
-    ctx.fillStyle = color
-    ctx.fill()
-}
-
-function drawTree(x, color) {
-    ctx.save()
-    ctx.translate(
-        (-sceneOffset * backgroundSpeedMultiplier + x) * hill1Stretch,
-        getTreeY(x, hill1BaseHeight, hill1Amplitude)
-    )
-
-    const treeTrunkHeight = 5
-    const treeTrunkWidth = 2
-    const treeCrownHeight = 25
-    const treeCrownWidth = 10
-
-    // Draw trunk
-    ctx.fillStyle = "#7D833C"
-    ctx.fillRect(
-        -treeTrunkWidth / 2,
-        -treeTrunkHeight,
-        treeTrunkWidth,
-        treeTrunkHeight
-    )
-
-    // Draw crown
-    ctx.beginPath()
-    ctx.moveTo(-treeCrownWidth / 2, -treeTrunkHeight)
-    ctx.lineTo(0, -(treeTrunkHeight + treeCrownHeight))
-    ctx.lineTo(treeCrownWidth / 2, -treeTrunkHeight)
-    ctx.fillStyle = color
-    ctx.fill()
-
-    ctx.restore()
-}
-
-function getHillY(windowX, baseHeight, amplitude, stretch) {
-    const sineBaseY = window.innerHeight - baseHeight
-    return (
-        Math.sinus((sceneOffset * backgroundSpeedMultiplier + windowX) * stretch) *
-        amplitude +
-        sineBaseY
-    )
-}
-
-function getTreeY(x, baseHeight, amplitude) {
-    const sineBaseY = window.innerHeight - baseHeight
-    return Math.sinus(x) * amplitude + sineBaseY
-}
-
-
+const hamberger = new Hamburger('.material-design-hamburger button', '#world')
+// const hamberger = new Hamburger('.material-design-hamburger__icon', '#world')
+const loading = new Loading('loading', hamberger, () => { })
+const top3element = document.getElementById('top3-list')
+
+const trophy = `<svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 576 512">
+<path fill="#ca6702" d="M400 0H176c-26.5 0-48.1 21.8-47.1 48.2c.2 5.3 .4 10.6 .7 15.8H24C10.7 64 0 74.7 0 88c0 92.6 33.5 157 78.5 200.7c44.3 43.1 98.3 64.8 138.1 75.8c23.4 6.5 39.4 26 39.4 45.6c0 20.9-17 37.9-37.9 37.9H192c-17.7 0-32 14.3-32 32s14.3 32 32 32H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H357.9C337 448 320 431 320 410.1c0-19.6 15.9-39.2 39.4-45.6c39.9-11 93.9-32.7 138.2-75.8C542.5 245 576 180.6 576 88c0-13.3-10.7-24-24-24H446.4c.3-5.2 .5-10.4 .7-15.8C448.1 21.8 426.5 0 400 0zM48.9 112h84.4c9.1 90.1 29.2 150.3 51.9 190.6c-24.9-11-50.8-26.5-73.2-48.3c-32-31.1-58-76-63-142.3zM464.1 254.3c-22.4 21.8-48.3 37.3-73.2 48.3c22.7-40.3 42.8-100.5 51.9-190.6h84.4c-5.1 66.3-31.1 111.2-63 142.3z"/></svg>`
+
+const medal = `<svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+<path fill="#ca6702" d="M4.1 38.2L106.4 191.5c11.2-11.6 23.7-21.9 37.3-30.6L68.4 48h64.5l54.9 91.5c15.8-5.5 32.4-9.1 49.6-10.6l-6.1-10.1L169.3 15.5C163.5 5.9 153.1 0 141.9 0H24.6C11 0 0 11 0 24.6c0 4.8 1.4 9.6 4.1 13.6zm276.6 80.5l-6.1 10.1c17.2 1.5 33.8 5.2 49.6 10.6L379.2 48h64.5L368.4 160.9c13.6 8.7 26.1 19 37.3 30.6L507.9 38.2c2.7-4 4.1-8.8 4.1-13.6C512 11 501 0 487.4 0H370.1c-11.2 0-21.7 5.9-27.4 15.5L280.8 118.7zM256 208a128 128 0 1 1 0 256 128 128 0 1 1 0-256zm0 304a176 176 0 1 0 0-352 176 176 0 1 0 0 352zm7.2-257.5c-2.9-5.9-11.4-5.9-14.3 0l-19.2 38.9c-1.2 2.4-3.4 4-6 4.4L180.7 304c-6.6 1-9.2 9-4.4 13.6l31 30.2c1.9 1.8 2.7 4.5 2.3 7.1l-7.3 42.7c-1.1 6.5 5.7 11.5 11.6 8.4L252.3 386c2.3-1.2 5.1-1.2 7.4 0l38.4 20.2c5.9 3.1 12.7-1.9 11.6-8.4L302.4 355c-.4-2.6 .4-5.2 2.3-7.1l31-30.2c4.7-4.6 2.1-12.7-4.4-13.6l-42.9-6.2c-2.6-.4-4.9-2-6-4.4l-19.2-38.9z"/></svg>`
 if (typeof (Storage) !== "undefined") {
     localStorage["board.0.name"] = "Xkalux"
     localStorage["board.0.score"] = 9999
-    localStorage["board.1.name"] = "Unknow"
-    localStorage["board.1.score"] = 112
 }
 
-var EngGameMessage = function (selector, score) {
-    console.log(`score: ${score}`)
-    var scores = []
-    // If local storage exists…
+let player_name = ""
+
+const SaveScore = () => {
+    if (player_name !== '') {
+        const score = fieldDistance.innerHTML
+        // console.log(`save score:${score}`)
+        if (score > 0 && typeof (Storage) !== "undefined") {
+            var k = 0
+            for (var i = 0; i < localStorage.length; i++) {
+                if (localStorage["board." + i + ".name"] === player_name) {
+                    k = i
+                    break
+                }
+                if (typeof localStorage["board." + i + ".name"] !== "undefined") {
+                    k = i + 1
+                }
+            }
+            localStorage["board." + k + ".name"] = player_name
+            localStorage["board." + k + ".score"] = score
+        }
+    }
+    replay()
+}
+
+const SaveName = function (node) {
+    player_name = node.value
+    // console.log(player_name)
+}
+
+const loadScore = () => {
+    const scores = []
     if (typeof (Storage) !== "undefined") {
-        // Reading storage for saved scores
         for (var i = 0; i < localStorage.length; i++) {
             if (typeof localStorage["board." + i + ".name"] !== "undefined") {
                 scores.push({
@@ -578,57 +53,37 @@ var EngGameMessage = function (selector, score) {
                 })
             }
         }
-        // Sorting leaderboard
-        scores.sort(function (a, b) { return b.score - a.score })
-        // Prepare html to show
-        var html = "<ol class=\"b-scores\">"
-        for (var j = 0; j < scores.length; j++) {
-            html += "<li class=\"row\">"
-            // if (score > scores[j].score) {
-            //     html += "Your score: " + score + ". <input onchange=\"SaveName(this)\" value=\"\" autofocus=\"autofocus\" type=\"text\" placeholder=\"Enter your name\" class=\"b-scores__input\" \/><\/li><li class=\"b-scores__box\">"
-            //     score = 0
-            // }
-            const _name = `<div class="col b-scores-name-text">${scores[j].name}</div>`
-            const _score = `<div class="col b-scores-score-text">${scores[j].score}</div>`
-            html += _name + _score + "<\/li>"
-            // html += scores[j].name + ": " + scores[j].score + "<\/li>"
-
-        }
-        html += "<\/ol>"
-        if (score > 0) {
-            html += "<span class=\"b-scores__box\">Your score: " + score + ". <input onchange=\"SaveName(this)\" value=\"\" autofocus=\"autofocus\" type=\"text\" placeholder=\"Enter your name\" class=\"b-scores__input\" \/><\/span>"
-        }
-
-
-        document.querySelector(selector).innerHTML = html
     }
+    scores.sort(function (a, b) { return b.score - a.score })
+    return scores
 }
 
-/**
- * Saves score in local storage
- * @param {Number}    score
- * @param {HTML node} node
- */
-var SaveScore = function (score, node) {
-    // console.log(node.innerHTML)
-    if (player_name === '') return
-    if (score > 0 && typeof (Storage) !== "undefined") {
-        var k = 0
-        for (var i = 0; i < localStorage.length; i++) {
-            if (typeof localStorage["board." + i + ".name"] !== "undefined") {
-                k = i + 1
-            }
-        }
-        localStorage["board." + k + ".name"] = player_name
-        localStorage["board." + k + ".score"] = score
-        // node.innerHTML = "Done!"
+const loadTop3 = () => {
+    const scores = loadScore()
+    const length = scores.length > 3 ? 3 : scores.length
+    let html = ''
+    for (let i = 0; i < length; i++) {
+        const icon = i === 0 ? trophy : medal
+        html += `<p class='top3-item'>${icon} ${scores[i].name}</p>`
     }
+    top3element.innerHTML = html
 }
-/**
-* Saves name from input into global variable
-* @param {HTML node} node
-*/
-var SaveName = function (node) {
-    player_name = node.value
-    console.log(player_name)
+
+
+
+const loadScoreBoard = () => {
+
+    const scores = loadScore()
+
+    var html = "LeaderBoard<ol class=\"b-scores\">"
+    for (var j = 0; j < scores.length; j++) {
+        html += "<li class=\"row\">"
+        const _name = `<div class="col underline"><p class='text-start'>${scores[j].name}</p></div>`
+        const _score = `<div class="col underline"><p class='text-end'>${scores[j].score}</p></div>`
+        html += "<div class='col'></div>" + _name + _score + "<div class='col'></div><\/li>"
+    }
+    html += "<\/ol>"
+    document.querySelector('#leaderboard').innerHTML = html
 }
+
+loadTop3()

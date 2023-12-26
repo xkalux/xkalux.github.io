@@ -1,21 +1,34 @@
-h5 {
+.loading>h5 {
     /* color: #ccc; */
-    margin: 0;
-    font: 1em Prompt;
+    /* margin: 0; */
+    /* font: 1em Prompt; */
     text-transform: uppercase;
     letter-spacing: .1em;
+    color: rgb(31, 47, 48);
+}
+
+.loading>h5>#loading-site-text {
+    font-weight: 900;
+}
+
+.loading--hide {
+    visibility: hidden;
 }
 
 .loading {
-    /* position: absolute;
-    left: calc(50% - 320px); */
-    z-index: 99;
+    position: absolute;
+    left: 50%;
+    top: 120px;
+    transform: translate(-50%, 0%);
     padding: 20px;
     border-radius: .6em;
-    background-color: rgba(44, 77, 41, 0.2);
-    margin-top: 70px;
-    margin-left: 70px;
-    margin-right: 70px;
+    background-color: rgba(66, 97, 63, 0.1);
+    font-family: 'Prompt';
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .loading span {
@@ -25,7 +38,7 @@ h5 {
     width: .3em;
     height: .6em;
     margin: .19em;
-    background: #007DB6;
+    background: #075275;
     border-radius: .6em;
     animation: loading 1s infinite alternate;
 }

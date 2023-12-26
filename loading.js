@@ -1,19 +1,32 @@
-const loading_site = document.getElementById('loading-site')
-const loading = document.getElementById('loading')
-loading.style.visibility = 'hidden'
+'use strict'
 
-const listA = document.getElementsByTagName('a')
+const Loading = function (loading_selector, hamberger, onClick = () => { }) {
+    const loadingElement = document.getElementById(loading_selector)
+    const listA = document.getElementsByTagName('a')
 
-for (let index = 0; index < listA.length; index++) {
-    const element = listA[index]
 
-    if (element.href.includes("#") || element.target === '_blank')
-        continue
+    loadingElement.innerHTML = `<h5 class="">Launching <strong id="loading-site-text">your site</strong><br>
+                        <small>It might take a while. Thank you for holding strong.</small>
+                        </h5>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>`
 
-    element.addEventListener('click', () => {
-        const scoreBoard = document.getElementById("scoreboard")
-        scoreBoard.style.visibility = 'hidden'
-        loading.style.visibility = 'visible'
-        loading_site.innerHTML = element.innerHTML.trim()
-    })
+    const displaySiteElement = document.getElementById('loading-site-text')
+
+    for (const a of listA) {
+        if (a.href.includes("#") || a.target === 'blank')
+            continue
+
+        a.addEventListener('click', () => {
+            displaySiteElement.innerHTML = a.innerHTML
+            loadingElement.classList.toggle('loading--hide')
+            hamberger.toggle()
+            onClick()
+        })
+    }
 }

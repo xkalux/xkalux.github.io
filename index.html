@@ -2,155 +2,131 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-FT5W2F0LS4"></script>
-	<script>
-		window.dataLayer = window.dataLayer || []
-		function gtag() { dataLayer.push(arguments) }
-		gtag('js', new Date())
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FT5W2F0LS4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || []
+        function gtag() { dataLayer.push(arguments) }
+        gtag('js', new Date())
 
-		gtag('config', 'G-FT5W2F0LS4');
-	</script>
+        gtag('config', 'G-FT5W2F0LS4');
+    </script>
 
-	<title>Class X {&nbsp;.&nbsp;.&nbsp;.&nbsp;}</title>
-	<link rel="icon" type="image/png" href="terminal.png" />
-	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Prompt:ital,wght@1,200&family=Share+Tech+Mono&display=swap&family=Prompt&display=swap');
-	</style>
-
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-	<link rel="stylesheet" href="./style.css">
-	<link rel="stylesheet" href="./navbar.css">
-	<link rel="stylesheet" href="./loading.css">
+    <title>Class X {&nbsp;.&nbsp;.&nbsp;.&nbsp;}</title>
+    <link rel="icon" type="image/png" href="./terminal.png" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Prompt:ital,wght@1,200&family=Share+Tech+Mono&display=swap&family=Prompt&display=swap');
+    </style>
+    <link rel="stylesheet" href="./reset.min.css">
+    <link rel="stylesheet" href="./rabbit-style.css">
+    <link rel="stylesheet" href="./material-design-hamburger.css">
+    <link rel="stylesheet" href="./loading.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">
-				Class X
-			</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+    <!-- rabbit -->
+    <div id="world">
+        <div id="top3">
+            Top 3 : Players
+            <div id="top3-list"></div>
+        </div>
+        <div id="gameoverInstructions">
+            Game Over
+            <div id="leaderboard"></div>
 
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav">
-					<li class="nav-item"> <a class="nav-link nav-text" href="#">{</a> </li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="SlideDropdownMenuLink" role="button"
-							data-bs-toggle="dropdown" aria-expanded="true">
-							Slides
-						</a>
-						<ul class="dropdown-menu dropdown-menu-lg-start dropdown-menu-dark"
-							aria-labelledby="SlideDropdownMenuLink">
-							<li>
-								<a class="dropdown-item"
-									href="https://xkalux.github.io/slidev/datastructures_and_algorithms/">
-									DataStructures and Algorithms</a>
-							</li>
-							<li>
-								<a class="dropdown-item" href="https://xkalux.github.io/slidev/dotnet_and_angular/">
-									Internet Programming</a>
-							</li>
-							<li>
-								<a class="dropdown-item"
-									href="https://drive.google.com/drive/folders/1IkSTdjWErZN-pTB_YMq-Xl1yEn8PDvjf?usp=sharing">
-									2D Game in Unity (Basic)</a>
-							</li>
-							<li>
-								<a class="dropdown-item"
-									href="https://drive.google.com/drive/folders/1Mq3zef_Xbq2rQeoDSvZz6w8wdN_JhCzX?usp=sharing">
-									Programming in Go (Basic)</a>
-							</li>
-						</ul>
-					</li>
+            <input class="input" onchange="SaveName(this)" autofocus="autofocus" placeholder="Enter your name"
+                type="text">
+            <button class="button" onclick="SaveScore()">Restart</button>
+        </div>
+        <div id="dist">
+            <div class="label">distance</div>
+            <div id="distValue">000</div>
+        </div>
 
-					<li class="nav-item"> <a class="nav-link nav-text" href="#">,</a> </li>
+        <div id="instructions">
+            Click/Space to jump
+            <span class="lightInstructions"> — Grab the carrots / avoid the hedgehogs</span>
+        </div>
+        <div id="credits">
+            <p>credits: <a href="https://codepen.io/Yakudoo/pen/YGxYej" target="blank">The frantic run of the valorous
+                    rabbit</a> | <a href="https://codepen.io/redlabor/pen/nzwPGv" target="blank">Pushing pixels css
+                    loader</a></p>
+        </div>
+    </div>
 
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLinkx" role="button"
-							data-bs-toggle="dropdown" aria-expanded="true">
-							Help
-						</a>
-						<ul class="dropdown-menu dropdown-menu-lg-start dropdown-menu-dark"
-							aria-labelledby="navbarDarkDropdownMenuLinkx">
-							<li><a class="dropdown-item"
-									href="https://script.google.com/a/macros/rmuti.ac.th/s/AKfycbylF7u6F1otwbuJH78ldd98f0qGS1RFMeeiyyEktX6ZQMAHFjaGWNttRG6YD4rlm54V/exec">
-									Check Score</a></li>
+    <!-- rabbit -->
 
-							<li><a class="dropdown-item"
-									href="https://drive.google.com/drive/folders/1Dina0y2vt5lFC1TOPxaMRx-DUqG7i3RI?usp=sharing">
-									Class Assets</a></li>
+    <!-- hamburger -->
+    <section class="material-design-hamburger-wrapper">
 
-							<li><a class="dropdown-item"
-									href="https://docs.google.com/forms/d/e/1FAIpQLSfDsL5-IAHCXUr8N20yHxk83vRX5smW_kXNtLex0VT1brzVNw/viewform">
-									Class Register</a></li>
+        <section class="material-design-hamburger" id="hamburger-icon">
+            <button class="material-design-hamburger__icon">
+                <span class="material-design-hamburger__layer"></span>
+            </button>
+        </section>
 
-						</ul>
-					</li>
+        <section class="menu menu--off" id="hamburger-menu">
+            <div>
+                Slides {
+                <ul>
+                    <li>
+                        <a class="dropdown-item" href="https://xkalux.github.io/slidev/datastructures_and_algorithms/">
+                            DataStructures and Algorithms</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="https://xkalux.github.io/slidev/dotnet_and_angular/">
+                            Internet Programming</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item"
+                            href="https://drive.google.com/drive/folders/1IkSTdjWErZN-pTB_YMq-Xl1yEn8PDvjf?usp=sharing">
+                            2D Game in Unity (Basic)</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item"
+                            href="https://drive.google.com/drive/folders/1Mq3zef_Xbq2rQeoDSvZz6w8wdN_JhCzX?usp=sharing">
+                            Programming in Go (Basic)</a>
+                    </li>
+                </ul>
+                }
+            </div>
 
-					<li class="nav-item"> <a class="nav-link nav-text" href="#">}</a> </li>
-				</ul>
+            <div>
+                Help {
+                <ul>
+                    <li><a class="dropdown-item"
+                            href="https://script.google.com/a/macros/rmuti.ac.th/s/AKfycbylF7u6F1otwbuJH78ldd98f0qGS1RFMeeiyyEktX6ZQMAHFjaGWNttRG6YD4rlm54V/exec">
+                            Check Score</a></li>
 
-			</div>
+                    <li><a class="dropdown-item"
+                            href="https://drive.google.com/drive/folders/1Dina0y2vt5lFC1TOPxaMRx-DUqG7i3RI?usp=sharing">
+                            Class Assets</a></li>
 
-		</div>
+                    <li><a class="dropdown-item"
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSfDsL5-IAHCXUr8N20yHxk83vRX5smW_kXNtLex0VT1brzVNw/viewform">
+                            Class Register</a></li>
+                </ul>
+                }
+            </div>
+        </section>
 
-	</nav>
+    </section>
+    <!-- hamburger -->
 
-	<div class="container-fluid">
-		<div class="game-container">
-			<div id="score"></div>
-			<canvas id="game" width="375" height="375"></canvas>
-			<div id="introduction">Hold down the mouse/space to stretch out a stick<br>Press Esc to restart</div>
-			<div id="scoreboard" class="">
-				<div>LeaderBoard</div>
-				<div id="leaderboard"></div>
-				<button class="center" id="restart" onclick="SaveScore(score,this)">Restart</button>
-			</div>
-			<div id="perfect">DOUBLE SCORE</div>
+    <!-- loading -->
+    <div id="loading" class="loading text-center loading--hide"></div>
+    <!-- loading -->
 
-			<!-- <button id="restart">RESTART</button> -->
-		</div>
+    <script src="./material-design-hamburger.js"></script>
+    <script src="./loading.js"></script>
 
-		<div id="loading" class="loading text-center">
-			<h5 class="">Launching <b id="loading-site">your site</b><br>
-				<small>It might take a while. Thank you for holding strong.</small>
-			</h5>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
+    <script src="./three.js"></script>
+    <script src="./TweenMax.min.js"></script>
+    <script src="./OrbitControls.js"></script>
+    <script src="./rabbit-script.js"></script>
 
-
-
-
-		<div class="base-on">Based on :
-			<a href="https://codepen.io/HunorMarton/pen/xxOMQKg" target="_blank" rel="codepen.io">
-				Stick Hero with Canvas</a>
-			&nbsp;&nbsp;|
-			<a href="https://codepen.io/redlabor/pen/nzwPGv" target="_blank" rel="codepen.io">
-				Pushing pixels css loader</a>
-		</div>
-	</div>
-
-
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-		crossorigin="anonymous"></script>
-	<script src="./loading.js"></script>
-	<script src="./navbar.js"></script>
-	<script src="./script.js"></script>
-
+    <script src="./script.js"></script>
 </body>
-
-</html>
