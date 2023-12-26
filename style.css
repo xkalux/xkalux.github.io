@@ -20,8 +20,8 @@
     font-family: Voltaire;
     letter-spacing: 2px;
     color: #b9630d;
-    right: -30px;
-    top: 30px;
+    right: -45px;
+    top: 20px;
     transform: translate(-50%, 0%);
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -31,7 +31,7 @@
 }
 
 #top3-list {
-    font-size: 0.9em;
+    font-size: 0.8em;
     margin-top: 5px;
     text-align: start;
     font-family: Prompt;
@@ -40,7 +40,6 @@
 .top3-item {
     margin-bottom: 3px;
     color: #ca6702;
-    font-size: 1em;
     margin-top: 5px;
 }
 
