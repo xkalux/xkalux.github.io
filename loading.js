@@ -17,6 +17,11 @@ const Loading = function (loading_selector, hamberger, onClick = () => { }) {
                         <span></span>`
 
     const displaySiteElement = document.getElementById('loading-site-text')
+    const toggle = () => {
+        loadingElement.classList.toggle('loading--hide')
+        hamberger.toggle()
+        onClick()
+    }
 
     for (const a of listA) {
         if (a.href.includes("#") || a.target === 'blank')
@@ -24,9 +29,9 @@ const Loading = function (loading_selector, hamberger, onClick = () => { }) {
 
         a.addEventListener('click', () => {
             displaySiteElement.innerHTML = a.innerHTML
-            loadingElement.classList.toggle('loading--hide')
-            hamberger.toggle()
-            onClick()
+            toggle()
         })
     }
+
+    return loadingElement
 }

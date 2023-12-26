@@ -156,9 +156,9 @@ function handleWindowResize() {
 function handleMouseDown(event) {
   if (gameStatus == "play")
     hero.jump()
-  else if (gameStatus == "readyToReplay") {
-    // replay()
-  }
+  // else if (gameStatus == "readyToReplay") {
+  //   replay()
+  // }
 }
 
 function createLights() {
@@ -1084,6 +1084,7 @@ function replay() {
     x: .4, ease: Power4.easeIn, delay: 1, onComplete: function () {
 
       resetGame()
+      // 
     }
   })
 
@@ -1258,8 +1259,6 @@ function render() {
   renderer.render(scene, camera)
 }
 
-window.addEventListener('load', init, false)
-
 function init(event) {
   initScreenAnd3D()
   createLights()
@@ -1379,6 +1378,7 @@ Trunc = function () {
 
   }
 
-
   this.mesh.castShadow = true
 }
+
+window.addEventListener('load', init, false)

@@ -2,9 +2,12 @@
   --hamburger__icon__color: #457b9d;
 }
 
+#hamburger-icon {
+  margin-top: 10px;
+}
+
 .material-design-hamburger-wrapper {
   transition: all 300ms ease-in-out;
-  /* margin: 1em 0; */
   padding: 0;
 }
 
@@ -68,7 +71,9 @@
   display: block;
   width: 45px;
   height: 10px;
-  background: var(--hamburger__icon__color);
+  /* background: var(--hamburger__icon__color); */
+  background-color: #00A77D;
+  border-radius: 10px;
   position: relative;
   -webkit-animation-duration: 300ms;
   animation-duration: 300ms;
@@ -78,13 +83,15 @@
 
 .material-design-hamburger__layer:before,
 .material-design-hamburger__layer:after {
+  border-radius: 10px;
+  background: var(--hamburger__icon__color);
   margin-top: -7px;
   margin-bottom: -7px;
   display: block;
   width: inherit;
   height: 10px;
   position: absolute;
-  background: inherit;
+  /* background: inherit; */
   left: 0px;
   content: '';
   -webkit-animation-duration: 300ms;
@@ -102,6 +109,8 @@
 }
 
 .material-design-hamburger__icon--to-arrow {
+  background: var(--hamburger__icon__color);
+  border-radius: 1px;
   -webkit-animation-name: material-design-hamburger__icon--slide;
   animation-name: material-design-hamburger__icon--slide;
   -webkit-animation-fill-mode: forwards;
@@ -109,7 +118,8 @@
 }
 
 .material-design-hamburger__icon--to-arrow:before {
-  background-color: rgb(21, 97, 97);
+  background: var(--hamburger__icon__color);
+  border-radius: 1px;
   position: relative;
   top: -8px;
   height: 10px;
@@ -121,7 +131,8 @@
 }
 
 .material-design-hamburger__icon--to-arrow:after {
-  background-color: rgb(21, 97, 97);
+  background: var(--hamburger__icon__color);
+  border-radius: 1px;
   position: relative;
   top: -2px;
   height: 10px;
