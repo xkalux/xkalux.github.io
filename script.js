@@ -41,18 +41,27 @@ const SaveScore = () => {
         const score = fieldDistance.innerHTML
         // console.log(`save score:${score}`)
         if (score > 0 && typeof (Storage) !== "undefined") {
-            var k = 0
+            let k = 0
+            let isSelf = false
             for (var i = 0; i < localStorage.length; i++) {
-                if (localStorage["board." + i + ".name"] === player_name) {
+                if ((localStorage["board." + i + ".name"] + '').toLowerCase().trim() === player_name.toLowerCase().trim()) {
                     k = i
+                    isSelf = true
                     break
                 }
                 if (typeof localStorage["board." + i + ".name"] !== "undefined") {
                     k = i + 1
                 }
             }
-            localStorage["board." + k + ".name"] = player_name
-            localStorage["board." + k + ".score"] = score
+
+            if (isSelf && localStorage["board." + k + ".score"] < score)
+                localStorage["board." + k + ".score"] = score
+
+            if (!isSelf) {
+                localStorage["board." + k + ".name"] = player_name.trim()
+                localStorage["board." + k + ".score"] = score
+            }
+
         }
     }
     replay()
