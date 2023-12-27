@@ -8,7 +8,7 @@ const GameAudio = function (audio_id_selector) {
     audio_element.innerHTML = `<div id="audio-off" class="audio-icon"></div><div id="audio-on" class="audio-icon"></div>`
 
     const audio = {
-        clip: new Audio('https://xkalux.github.io/_Antonio-Vivaldi-Summer_01.mp3'),
+        clip: new Audio('./src/audio/_Antonio-Vivaldi-Summer_01.mp3'),
         icon_on: document.getElementById('audio-on'),
         icon_off: document.getElementById('audio-off')
     }

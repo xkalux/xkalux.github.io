@@ -27,10 +27,9 @@ var cameraPosGameOver = 260
 var monsterAcceleration = 0.004
 var malusClearColor = 0xb44b39
 var malusClearAlpha = 0
-// var audio = new Audio('https://xkalux.github.io/_Antonio-Vivaldi-Summer_01.mp3')
-// audio.play()
-// console.log(audio.muted)
 var fieldGameOver, fieldDistance
+
+var isStart = false
 
 //SCREEN & MOUSE VARIABLES
 
@@ -1028,6 +1027,18 @@ function updateMonsterPosition() {
   monster.mesh.rotation.z = -Math.PI / 2 + angle
 }
 
+function firstStart() {
+  gameStatus = "gameOver"
+  monster.sit()
+  hero.hang()
+  monster.heroHolder.add(hero.mesh)
+  TweenMax.to(this, 1, { speed: 0 })
+  TweenMax.to(camera.position, 3, { z: cameraPosGameOver, y: 60, x: -30 })
+  carrot.mesh.visible = false
+  obstacle.mesh.visible = false
+  clearInterval(levelInterval)
+}
+
 function gameOver() {
   fieldGameOver.className = "show"
   gameStatus = "gameOver"
@@ -1272,6 +1283,8 @@ function init(event) {
   initUI()
   resetGame()
   loop()
+  if (!isStart)
+    firstStart()//
 }
 
 function resetGame() {
@@ -1382,3 +1395,10 @@ Trunc = function () {
 }
 
 window.addEventListener('load', init, false)
+document.getElementById('start-game-btn').addEventListener('click', () => {
+  if (!isStart) {
+    isStart = true
+    replay()
+    document.getElementById('start-game-btn').style.display = 'none'
+  }
+})
