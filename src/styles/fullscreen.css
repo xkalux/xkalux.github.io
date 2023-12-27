@@ -1,0 +1,37 @@
+#fullscreen {
+    position: absolute;
+    margin-left: 135px;
+    margin-top: 25px;
+    display: flex;
+}
+
+.screen-icon {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    mask-repeat: no-repeat;
+}
+
+.screen-icon-hide {
+    display: none;
+}
+
+#screen-maximize {
+    background-color: #476d4e;
+    -webkit-mask-image: url('./../../src/images/screen-maximize.svg');
+    mask-image: url('./../../src/images/screen-maximize.svg');
+}
+
+#screen-maximize:hover {
+    background-color: #dc5f45;
+}
+
+#screen-minimize:hover {
+    background-color: #dc5f45;
+}
+
+#screen-minimize {
+    background-color: #386988;
+    -webkit-mask-image: url('./../../src/images/screen-minimize.svg');
+    mask-image: url('./../../src/images/screen-minimize.svg');
+}

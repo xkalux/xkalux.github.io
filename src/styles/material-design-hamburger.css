@@ -81,6 +81,12 @@
   animation-timing-function: ease-in-out;
 }
 
+.material-design-hamburger__layer:hover,
+.material-design-hamburger__layer:hover::before,
+.material-design-hamburger__layer:hover::after {
+  background-color: #dc5f45;
+}
+
 .material-design-hamburger__layer:before,
 .material-design-hamburger__layer:after {
   border-radius: 10px;
@@ -91,7 +97,6 @@
   width: inherit;
   height: 10px;
   position: absolute;
-  /* background: inherit; */
   left: 0px;
   content: '';
   -webkit-animation-duration: 300ms;

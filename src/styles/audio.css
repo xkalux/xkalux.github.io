@@ -1,0 +1,40 @@
+.audio {
+    position: absolute;
+    margin-left: 80px;
+    margin-top: 23px;
+    display: flex;
+    transition-duration: 0.25ms;
+}
+
+#audio-off {
+    background-color: #476d4e;
+    -webkit-mask-image: url('./../../src/images/audio-on.svg');
+    mask-image: url('./../../src/images/audio-on.svg');
+}
+
+#audio-off:hover {
+    background-color: #dc5f45;
+}
+
+#audio-on:hover {
+    background-color: #dc5f45;
+}
+
+#audio-on {
+    background-color: #386988;
+    -webkit-mask-image: url('./../../src/images/audio-off.svg');
+    mask-image: url('./../../src/images/audio-off.svg');
+    height: 2.8rem;
+    width: 2.8rem;
+}
+
+.audio-hide {
+    display: none;
+}
+
+.audio-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    mask-repeat: no-repeat;
+}

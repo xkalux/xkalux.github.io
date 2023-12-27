@@ -1,15 +1,13 @@
 'use strict'
 
-const ScoreBoard = function (score_element, score_board_element, fn_replay = () => { console.log('scoreboard btn cllback') }) {
+const ScoreBoard = function (score_id_selector, scoreboard_id_selector, fn_replay = () => { }, maxKeepScore = 20) {
+    const storage = 'local-data'
+    const score_element = document.getElementById(score_id_selector)
+    const score_board_element = document.getElementById(scoreboard_id_selector)
     score_board_element.innerHTML = `<div id="leaderboard"></div><div id="top3"></div>`
 
     const leaderboard = document.getElementById('leaderboard')
     const top3_element = document.getElementById('top3')
-
-    if (typeof (Storage) !== "undefined") {
-        localStorage["board.0.name"] = "Xkalux"
-        localStorage["board.0.score"] = 9999
-    }
 
     const score_board = {
         icon_trophy: `<svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 576 512">
@@ -26,39 +24,30 @@ const ScoreBoard = function (score_element, score_board_element, fn_replay = () 
     }
 
     score_board.SaveName = function (node) {
-        // console.log(node.value)
         score_board.player_name = node.value
     }
 
     score_board.SaveScore = function () {
-        // console.log('call SaveScore')
-        // console.log(fn_replay)
         const score = score_board.getPlayerScore()
-        // console.log('save score')
-        // console.log(score_board.player_name)
-        // console.log(score)
         if (score_board.player_name !== '') {
             if (score > 0 && typeof (Storage) !== "undefined") {
-                let k = 0
-                let isSelf = false
-                for (var i = 0; i < localStorage.length; i++) {
-                    if ((localStorage["board." + i + ".name"] + '').toLowerCase().trim() === score_board.player_name.toLowerCase().trim()) {
-                        k = i
-                        isSelf = true
-                        break
-                    }
-                    if (typeof localStorage["board." + i + ".name"] !== "undefined") {
-                        k = i + 1
-                    }
+                let scores = score_board.loadScore()
+                const player = scores.filter(e => e.name === score_board.player_name.toLowerCase().trim())[0]
+                if (typeof player !== 'undefined') {
+                    if (score > player.score)
+                        scores.map(e => {
+                            if (e.name === score_board.player_name)
+                                e.score = score
+                            else
+                                e.score
+                        })
+                } else {
+                    scores.push({
+                        name: score_board.player_name.trim(),
+                        score: score
+                    })
                 }
-
-                if (isSelf && localStorage["board." + k + ".score"] < score_board.score)
-                    localStorage["board." + k + ".score"] = score
-
-                if (!isSelf) {
-                    localStorage["board." + k + ".name"] = score_board.player_name.trim()
-                    localStorage["board." + k + ".score"] = score
-                }
+                localStorage[storage] = btoa(JSON.stringify(scores))
             }
             score_board.loadTop3()
         }
@@ -67,19 +56,14 @@ const ScoreBoard = function (score_element, score_board_element, fn_replay = () 
     }
 
     score_board.loadScore = function () {
-        const scores = []
+        let scores = [{ name: 'Xkalux', score: 9999 }]
         if (typeof (Storage) !== "undefined") {
-            for (var i = 0; i < localStorage.length; i++) {
-                if (typeof localStorage["board." + i + ".name"] !== "undefined") {
-                    scores.push({
-                        name: localStorage["board." + i + ".name"],
-                        score: localStorage["board." + i + ".score"]
-                    })
-                }
-            }
+            if (typeof localStorage[storage] !== 'undefined')
+                scores = JSON.parse(atob(localStorage[storage]))
         }
         scores.sort(function (a, b) { return b.score - a.score })
-        return scores
+
+        return scores.slice(0, maxKeepScore)
     }
 
     score_board.loadTop3 = function () {
