@@ -79,7 +79,8 @@ const ScoreBoard = function (score_id_selector, scoreboard_id_selector, fn_repla
         score_board.top3element.innerHTML = html
     }
 
-    score_board.loadScoreBoard = function () {
+
+    score_board.loadScoreBoard = function (showSaveButton = true) {
         const scores = score_board.loadScore()
 
         var html = "<div class='title'>LeaderBoard</div><div><ol class=\"b-scores\">"
@@ -90,13 +91,16 @@ const ScoreBoard = function (score_id_selector, scoreboard_id_selector, fn_repla
             html += "<div class='col'></div>" + _name + _score + "<div class='col'></div><\/li>"
         }
         html += "<\/ol><div>"
-        html += `<div class='score-board-action'>
+
+        if (showSaveButton)
+            html += `<div class='score-board-action'>
             <input class="input" maxlength="8" onchange="score_board.SaveName(this)" autofocus="autofocus" placeholder="Enter your name" type="text">
             <button class="button" onclick="score_board.SaveScore()">Save/Restart</button>
             </div>`
         // document.querySelector('#leaderboard').innerHTML = html
         leaderboard.innerHTML = html
     }
+
     score_board.clear = function () {
         leaderboard.innerHTML = ''
     }

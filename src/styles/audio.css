@@ -10,14 +10,22 @@
     background-color: #476d4e;
     -webkit-mask-image: url('./../../src/images/audio-on.svg');
     mask-image: url('./../../src/images/audio-on.svg');
+    transition: transform 0.15s;
+    transform: rotateX(0deg) rotateZ(0deg);
 }
 
 #audio-off:hover {
     background-color: #dc5f45;
+    transform: rotateX(0deg) rotateZ(-90deg);
+    width: 2.4rem;
+    height: 2.4rem;
 }
 
 #audio-on:hover {
     background-color: #dc5f45;
+    transform: rotateX(0deg) rotateZ(-90deg);
+    height: 2.5rem;
+    width: 2.5rem;
 }
 
 #audio-on {
@@ -26,6 +34,8 @@
     mask-image: url('./../../src/images/audio-off.svg');
     height: 2.8rem;
     width: 2.8rem;
+    transition: transform 0.15s;
+    transform: rotateX(0deg) translateY(0);
 }
 
 .audio-hide {

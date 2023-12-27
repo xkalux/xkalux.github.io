@@ -12,6 +12,7 @@ const GameAudio = function (audio_id_selector) {
         icon_on: document.getElementById('audio-on'),
         icon_off: document.getElementById('audio-off')
     }
+    audio.clip.loop = true
     audio.toggle = function () {
         if (audio.icon_on.classList.contains('audio-hide')) {
             audio.icon_on.classList.remove('audio-hide')

@@ -5,6 +5,7 @@ const score_board = new ScoreBoard('distValue', 'score-board', replay, 15)
 const fullscreen = new FullScreen('fullscreen')
 
 const loadScoreBoard = score_board.loadScoreBoard
+const clearScoreBoard = score_board.clear
 
 // fullscreen.openFullscreen()
 

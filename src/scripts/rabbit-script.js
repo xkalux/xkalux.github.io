@@ -1037,6 +1037,7 @@ function firstStart() {
   carrot.mesh.visible = false
   obstacle.mesh.visible = false
   clearInterval(levelInterval)
+  loadScoreBoard(false)
 }
 
 function gameOver() {
@@ -1398,6 +1399,7 @@ window.addEventListener('load', init, false)
 document.getElementById('start-game-btn').addEventListener('click', () => {
   if (!isStart) {
     isStart = true
+    clearScoreBoard()
     replay()
     document.getElementById('start-game-btn').style.display = 'none'
   }
