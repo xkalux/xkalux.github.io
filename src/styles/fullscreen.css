@@ -20,6 +20,7 @@
     background-color: #476d4e;
     -webkit-mask-image: url('./../../src/images/screen-maximize.svg');
     mask-image: url('./../../src/images/screen-maximize.svg');
+    mask-repeat: no-repeat;
     transition: transform 0.15s;
     transform: rotateX(0deg) translateY(0);
 }
@@ -38,6 +39,7 @@
     background-color: #386988;
     -webkit-mask-image: url('./../../src/images/screen-minimize.svg');
     mask-image: url('./../../src/images/screen-minimize.svg');
+    mask-repeat: no-repeat;
     transition: transform 0.15s;
     transform: rotateX(0deg) translateY(0);
 }

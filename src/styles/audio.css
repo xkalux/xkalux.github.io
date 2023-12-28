@@ -10,6 +10,7 @@
     background-color: #476d4e;
     -webkit-mask-image: url('./../../src/images/audio-on.svg');
     mask-image: url('./../../src/images/audio-on.svg');
+    mask-repeat: no-repeat;
     transition: transform 0.15s;
     transform: rotateX(0deg) rotateZ(0deg);
 }
@@ -32,6 +33,7 @@
     background-color: #386988;
     -webkit-mask-image: url('./../../src/images/audio-off.svg');
     mask-image: url('./../../src/images/audio-off.svg');
+    mask-repeat: no-repeat;
     height: 2.8rem;
     width: 2.8rem;
     transition: transform 0.15s;
