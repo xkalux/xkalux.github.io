@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FT5W2F0LS4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || []
+        function gtag() { dataLayer.push(arguments) }
+        gtag('js', new Date())
+
+        gtag('config', 'G-FT5W2F0LS4');
+    </script>
+
+    <title>Break !</title>
+    <link rel="icon" type="image/png" href="./../src/images/terminal.png" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Prompt:ital,wght@1,200&family=Share+Tech+Mono&display=swap&family=Prompt&display=swap');
+    </style>
+
+    <!-- <link rel="stylesheet" href="./../src/styles/material-design-hamburger.css"> -->
+    <link rel="stylesheet" href="./../src/styles/solar-style.css">
+    <link rel='stylesheet' href='./../src/styles/codemirror_5.26.0.css'>
+    <link rel='stylesheet' href='./../src/styles/markdown-style.css'>
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+
+    <div id="container">
+        <div id="ClockDisplay"></div>
+
+
+
+        <div class='solar-syst'>
+            <div class='sun'></div>
+            <div class='mercury'></div>
+            <div class='venus'></div>
+            <div class='earth'></div>
+            <div class='mars'></div>
+            <div class='jupiter'></div>
+            <div class='saturn'></div>
+            <div class='uranus'></div>
+            <div class='neptune'></div>
+            <div class='pluto'></div>
+            <div class='asteroids-belt'></div>
+        </div>
+
+
+        <div class="label">Break :/ </div>
+        <!-- <div class="sub-label">End time: <span id="endTime"></span></div> -->
+        <span id="timeLeft"></span>
+
+
+        <div class="countdown-panel">
+            <input type="text" value="10" id="timeInput">
+            <button id="timeBtn">Start</button>
+        </div>
+
+        <div id="markdown-output"></div>
+
+        <div id="credits">
+            <p>credits:
+                <a href="https://codepen.io/kowlor/pen/ZYYQoy" target="blank">Solar System animation - Pure CSS</a> |
+                <a href="https://codepen.io/marcobiedermann/pen/LLGwLb" target="blank">Live Markdown Editor</a>
+            </p>
+        </div>
+    </div>
+
+    <textarea class="js-input"></textarea>
+
+    <script src='./../src/scripts/codemirror_5.26.0.js'></script>
+    <script src='./../src/scripts/marked_0.3.6.js'></script>
+    <script src="./../src/scripts/material-design-hamburger.js"></script>
+    <script src="./../src/scripts/markdown-script.js"></script>
+    <script src="./xkalux.js"></script>
+    <script src="./script.js"></script>
+</body>

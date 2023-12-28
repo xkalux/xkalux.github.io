@@ -1,0 +1,211 @@
+#container {
+    left: -1px;
+    top: -1px;
+    position: absolute;
+    /* background-color: #dbe6e6; */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.menu--off {
+    left: -50%;
+    width: 50%;
+}
+
+.menu--on {
+    left: 0;
+}
+
+.menu--off div {
+    margin: 5px;
+}
+
+.hide {
+    display: none;
+}
+
+#markdown-output {
+    /* position: absolute;
+    top: 70px;
+    right: 20px; */
+    margin-top: 20px;
+    margin-left: 50px;
+    font-size: 1.5em;
+    font-family: 'Prompt';
+
+}
+
+.countdown-panel {
+    margin-top: 10px;
+    z-index: 1;
+    text-align: center;
+}
+
+.countdown-panel button {
+    cursor: pointer;
+    color: white;
+    background-color: #5b9cda;
+    height: 2em;
+    font-weight: 500;
+    border-radius: 0.25rem;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    font-family: Prompt;
+}
+
+.countdown-panel button:hover,
+.countdown-panel button:focus {
+    transition: all 0.25s;
+    background-color: #1c5d9b;
+
+    border: 2px solid #4A9DEC;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+}
+
+.countdown-panel input {
+    border: 2px solid transparent;
+    width: 9em;
+    height: 1.6em;
+    text-align: end;
+    padding-left: 0.5em;
+    outline: none;
+    overflow: hidden;
+    background-color: #F3F3F3;
+    border-radius: 0.25rem;
+    transition: all 0.25s;
+    font-size: 1.2rem;
+    font-family: Prompt;
+    letter-spacing: 1px;
+}
+
+.countdown-panel input:hover,
+.countdown-panel input:focus {
+    border: 2px solid #4A9DEC;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+    background-color: white;
+}
+
+.countdown {
+    vertical-align: baseline;
+    display: flex;
+    text-align: center;
+    font-family: -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen-Sans,
+        Ubuntu,
+        Cantarell,
+        "Helvetica Neue",
+        sans-serif;
+}
+
+/* p {
+    display: inline-block;
+    font-size: 1.5em;
+    list-style-type: none;
+    padding: 1em;
+    text-transform: uppercase;
+} */
+
+/* .label {
+    padding-left: 50px;
+    font-size: 1.4em;
+    font-family: -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen-Sans,
+        Ubuntu,
+        Cantarell,
+        "Helvetica Neue",
+        sans-serif;
+} */
+.label {
+    font-family: 'Prompt';
+    font-weight: 700;
+    font-size: 2em;
+    /* position: absolute; */
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.sub-label {
+    font-family: 'Prompt';
+    font-size: 1.2em;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+div p {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+.countdown ul {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+.countdown li {
+    display: inline-block;
+    font-size: 1.7em;
+    list-style-type: none;
+    /* padding: 1em; */
+    padding-left: 1em;
+    text-transform: uppercase;
+}
+
+.countdown li span {
+    display: block;
+    font-size: 4.5rem;
+}
+
+#credits {
+    position: absolute;
+    width: 100%;
+    margin: auto;
+    bottom: 0;
+    margin-bottom: 20px;
+    font-family: "Voltaire", sans-serif;
+    color: #886f50;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    letter-spacing: 1px;
+}
+
+#credits a {
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #886f50;
+    text-decoration: none;
+}
+
+#credits a:hover {
+    color: #dc5f45;
+    text-decoration: underline;
+}
+
+#ClockDisplay {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-family: 'Prompt';
+    font-size: 1.5em;
+    letter-spacing: 0.5px;
+}
