@@ -5,41 +5,29 @@
     display: flex;
 }
 
-.screen-icon {
-    width: 2rem;
-    height: 2rem;
-    cursor: pointer;
-    mask-repeat: no-repeat;
-}
-
-.screen-icon-hide {
-    display: none;
-}
-
-#screen-maximize {
-    background-color: #476d4e;
-    -webkit-mask-image: url('./../../src/images/screen-maximize.svg');
-    mask-image: url('./../../src/images/screen-maximize.svg');
-    mask-repeat: no-repeat;
-    transition: transform 0.15s;
+.fullscreen-icon {
+    width: 32px;
+    height: 32px;
     transform: rotateX(0deg) translateY(0);
-}
 
-#screen-maximize:hover {
-    background-color: #dc5f45;
-    transform: rotateX(0deg) rotateZ(-90deg);
-}
-
-#screen-minimize:hover {
-    background-color: #dc5f45;
-    transform: rotateX(0deg) rotateZ(-90deg);
-}
-
-#screen-minimize {
-    background-color: #386988;
+    background-color: #00A77D;
     -webkit-mask-image: url('./../../src/images/screen-minimize.svg');
     mask-image: url('./../../src/images/screen-minimize.svg');
     mask-repeat: no-repeat;
-    transition: transform 0.15s;
-    transform: rotateX(0deg) translateY(0);
+    transition: transform 0.2s;
+
+    opacity: 0.7;
+}
+
+.fullscreen-icon.maximize:hover,
+.fullscreen-icon:hover {
+    background-color: #dc5f45;
+    transform: rotateX(0deg) rotateZ(-90deg);
+}
+
+.fullscreen-icon.maximize {
+    background-color: #457b9d;
+    -webkit-mask-image: url('./../../src/images/screen-maximize.svg');
+    mask-image: url('./../../src/images/screen-maximize.svg');
+    transition: transform 0.2s;
 }

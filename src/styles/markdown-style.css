@@ -10,7 +10,8 @@ textarea {
 /* vendor/codemirror.css */
 
 .CodeMirror {
-  height: 98vh;
+  margin-top: 20px;
+  height: 95vh;
   font-size: 1.7em;
   background-color: rgb(181, 197, 197);
 }

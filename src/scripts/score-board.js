@@ -56,10 +56,17 @@ const ScoreBoard = function (score_id_selector, scoreboard_id_selector, fn_repla
     }
 
     score_board.loadScore = function () {
+        top3_element.classList.add('hide-board')
         let scores = [{ name: 'Xkalux', score: 9999 }]
         if (typeof (Storage) !== "undefined") {
-            if (typeof localStorage[storage] !== 'undefined')
-                scores = JSON.parse(atob(localStorage[storage]))
+            if (typeof localStorage[storage] !== 'undefined') {
+                try {
+                    scores = JSON.parse(atob(localStorage[storage]))
+                } catch (error) {
+                    console.log('invalid local data')
+                    localStorage.clear()
+                }
+            }
         }
         scores.sort(function (a, b) { return b.score - a.score })
 
@@ -83,14 +90,14 @@ const ScoreBoard = function (score_id_selector, scoreboard_id_selector, fn_repla
     score_board.loadScoreBoard = function (showSaveButton = true) {
         const scores = score_board.loadScore()
 
-        var html = "<div class='title'>LeaderBoard</div><div><ol class=\"b-scores\">"
+        var html = "<div class='board'><div class='title'>LeaderBoard</div><div><ol class=\"b-scores\">"
         for (var j = 0; j < scores.length; j++) {
             html += "<li class=\"row\">"
             const _name = `<div class="col underline"><p class='text-start'>${scores[j].name}</p></div>`
             const _score = `<div class="col underline"><p class='text-end'>${scores[j].score}</p></div>`
             html += "<div class='col'></div>" + _name + _score + "<div class='col'></div><\/li>"
         }
-        html += "<\/ol><div>"
+        html += "<\/ol><div></div>"
 
         if (showSaveButton)
             html += `<div class='score-board-action'>
@@ -102,6 +109,7 @@ const ScoreBoard = function (score_id_selector, scoreboard_id_selector, fn_repla
     }
 
     score_board.clear = function () {
+        top3_element.classList.remove('hide-board')
         leaderboard.innerHTML = ''
     }
 

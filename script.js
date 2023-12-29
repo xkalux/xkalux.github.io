@@ -7,11 +7,20 @@ const fullscreen = new FullScreen('fullscreen')
 const loadScoreBoard = score_board.loadScoreBoard
 const clearScoreBoard = score_board.clear
 
-// fullscreen.openFullscreen()
-
 const is_back_forward = performance.getEntriesByType("navigation").filter((e) => e.type === "back_forward")[0]
 if (is_back_forward) {
     if (!loading.classList.contains('loading--hide')) {
         loadingElement.classList.add('loading--hide')
     }
 }
+
+document.getElementById('start-game-btn').addEventListener('click', () => {
+    if (!isStart) {
+        isStart = true
+        clearScoreBoard()
+        replay()
+        document.getElementById('start-game-btn').style.display = 'none'
+        fullscreen.openFullscreen()
+        fullscreen.draw_icon()
+    }
+})

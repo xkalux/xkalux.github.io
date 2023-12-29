@@ -39,7 +39,7 @@
 .menu--off {
   position: absolute;
   left: -50%;
-  width: 40%;
+  width: 50%;
   display: block;
   background: #eee;
   border-top-right-radius: 10px;

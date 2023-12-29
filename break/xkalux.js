@@ -1,8 +1,35 @@
 'use strict'
 
+const AMPM = (hour) => {
+    let session = "AM"
+    if (hour == 0)
+        hour = 12
+
+    if (hour > 12) {
+        hour -= 12
+        session = "PM"
+    }
+    return session
+}
+const EndTime = (timestamp) => {
+    const end = new Date(timestamp)
+    return {
+        hour: end.getHours(),
+        minutes: end.getMinutes(),
+        seconds: end.getSeconds(),
+        session: AMPM(end.getHours())
+    }
+}
+
 class ELEMENT {
     constructor(selector) {
         this.element = document.querySelector(selector)
+    }
+    get value() {
+        return this.element.value
+    }
+    set value(v) {
+        this.element.value = v
     }
     get innerHTML() {
         if (this.element !== null)
@@ -24,12 +51,11 @@ class CountDown {
         this.secondsLeft = 0
         this.timeLeftText = new ELEMENT(timeLeftSelector)
         this.endTimeText = new ELEMENT(endTimeSelector)
-        this.endTimeText.innerHTML = '-'
+        this.endTimeText.innerHTML = ''
         this.input = new ELEMENT(inputSelector)
         this.input.element.type = 'number'
         this.button = new ELEMENT(buttonSelector)
         this.displayTimeLeft(0)
-
     }
 
     constructor(timeLeftSelector, endTimeSelector, inputSelector, buttonSelector, callback = () => { }, minMode = true) {
@@ -41,17 +67,27 @@ class CountDown {
         })
     }
 
-    setTime(seconds) {
+    _setTime(seconds) {
         if (this.mode)
             seconds *= 60
         clearInterval(this.intervalTimer)
         this.secondsLeft = seconds
+        return seconds
+    }
+
+    setTime(seconds) {
+        this._setTime(seconds)
         this.timer()
     }
 
-    timer() {
+    _calculateEndTime(seconds) {
         const now = Date.now()
-        const end = now + this.secondsLeft * 1000
+        return now + seconds * 1000
+    }
+
+    timer() {
+        // const now = Date.now()
+        const end = this._calculateEndTime(this.secondsLeft) //now + this.secondsLeft * 1000
         this.displayTimeLeft(this.secondsLeft)
         this.displayEndTime(end)
         this.countdown(end)
@@ -61,18 +97,17 @@ class CountDown {
         const minutes = Math.floor((secondsLeft % 3600) / 60)
         const seconds = secondsLeft % 60
 
-        this.timeLeftText.innerHTML = `<div class='countdown'><ul>
+        this.timeLeftText.innerHTML = `<div class='timeleft-label'>Time Left</div><div class='countdown'><ul>
             <li><span>${zeroPadded(minutes)}</span>Minutes</li>
-            <li><span>${zeroPadded(seconds)}</span>Seconds</li>
+            <li class='seconds'><span>${zeroPadded(seconds)}</span>Seconds</li>
             </ul></div>`
     }
 
-    displayEndTime(timestamp) {
-        const end = new Date(timestamp)
-        const hour = end.getHours()
-        const minutes = end.getMinutes()
 
-        this.endTimeText.innerHTML = `${hourConvert(hour)}:${zeroPadded(minutes)}`
+
+    displayEndTime(timestamp) {
+        const end = EndTime(timestamp)
+        this.endTimeText.innerHTML = `End time: ${hourConvert(end.hour)}:${zeroPadded(end.minutes)}:${zeroPadded(end.seconds)} ${end.session}`
     }
 
     countdown(end) {
@@ -101,6 +136,8 @@ function hourConvert(hour) {
     return (hour % 12) || 12
 }
 
+
+
 const Clock = (selector) => {
     const element = new ELEMENT(selector)
     const clock = {}
@@ -109,20 +146,13 @@ const Clock = (selector) => {
         let h = date.getHours() // 0 - 23
         let m = date.getMinutes() // 0 - 59
         let s = date.getSeconds() // 0 - 59
-        let session = "AM"
-        if (h == 0)
-            h = 12
-
-        if (h > 12) {
-            h -= 12
-            session = "PM"
-        }
-
+        let session = AMPM(h)
         h = (h < 10) ? "0" + h : h
         m = (m < 10) ? "0" + m : m
         s = (s < 10) ? "0" + s : s
 
-        element.innerHTML = h + ":" + m + ":" + s + " " + session
+        const time = `<span class='clock-time'>${h}</span>:<span class='clock-time'>${m}</span>:<span class='clock-time'>${s}</span>${session}`
+        element.innerHTML = time
 
         setTimeout(clock.showTime, 1000)
     }

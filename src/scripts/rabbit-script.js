@@ -145,7 +145,7 @@ function handleWindowResize() {
   WIDTH = window.innerWidth
   windowHalfX = WIDTH / 2
   windowHalfY = HEIGHT / 2
-  // console.log(`height: ${HEIGHT} , width: ${WIDTH}`)
+
   renderer.setSize(WIDTH, HEIGHT)
   camera.aspect = WIDTH / HEIGHT
   camera.updateProjectionMatrix()
@@ -155,9 +155,6 @@ function handleWindowResize() {
 function handleMouseDown(event) {
   if (gameStatus == "play")
     hero.jump()
-  // else if (gameStatus == "readyToReplay") {
-  //   replay()
-  // }
 }
 
 function createLights() {
@@ -1396,11 +1393,3 @@ Trunc = function () {
 }
 
 window.addEventListener('load', init, false)
-document.getElementById('start-game-btn').addEventListener('click', () => {
-  if (!isStart) {
-    isStart = true
-    clearScoreBoard()
-    replay()
-    document.getElementById('start-game-btn').style.display = 'none'
-  }
-})

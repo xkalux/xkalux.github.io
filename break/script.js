@@ -21,10 +21,7 @@ new Markdown()
 const inputMarkdown = document.querySelector('.CodeMirror')
 const previewMarkdown = document.querySelector('.js-preview')
 
-
-
 inputMarkdown.classList.toggle('hide')
-// countdown_panel.classList.toggle('hide')
 
 const keyFn = (e) => {
     const key = e.key
@@ -32,6 +29,7 @@ const keyFn = (e) => {
         case 'Insert':
             inputMarkdown.classList.toggle('hide')
             break
+        case 'Pause':
         case 'Home':
             countdown_panel.classList.toggle('hide')
             break
@@ -39,5 +37,7 @@ const keyFn = (e) => {
             break
     }
 }
+
+document.querySelector('.timeleft-label')?.addEventListener('click', () => countdown_panel.classList.toggle('hide'))
 
 window.addEventListener('keyup', (e) => keyFn(e))

@@ -29,12 +29,10 @@
 </head>
 
 <body>
+    <div class="label">Break :/ </div>
 
     <div id="container">
         <div id="ClockDisplay"></div>
-
-
-
         <div class='solar-syst'>
             <div class='sun'></div>
             <div class='mercury'></div>
@@ -49,14 +47,13 @@
             <div class='asteroids-belt'></div>
         </div>
 
-
-        <div class="label">Break :/ </div>
-        <!-- <div class="sub-label">End time: <span id="endTime"></span></div> -->
-        <span id="timeLeft"></span>
-
+        <div class="countdown-text">
+            <span id="timeLeft"></span>
+            <div class="sub-label"><span id="endTime"></span></div>
+        </div>
 
         <div class="countdown-panel">
-            <input type="text" value="10" id="timeInput">
+            <input type="text" value="10" inputmode="numeric" pattern="[0-9]{2}" id="timeInput">
             <button id="timeBtn">Start</button>
         </div>
 

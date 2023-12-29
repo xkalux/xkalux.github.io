@@ -1,15 +1,27 @@
 #score-board {
     font-family: "Voltaire", sans-serif;
+    color: #ca533b;
+}
+
+.hide-board {
+    display: none;
 }
 
 #leaderboard {
     position: absolute;
-    top: 25%;
-
-    width: 100%;
-    color: #005B41;
+    top: 23%;
+    width: 100vw;
     font-size: 1.2rem;
     font-family: Prompt;
+}
+
+#leaderboard .board {
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-top: 20px;
+    background-color: rgba(60, 141, 216, 0.2);
+    border-radius: 10px;
+    padding-bottom: 20px;
 }
 
 #leaderboard .score-board-action {
@@ -21,14 +33,12 @@
 }
 
 #leaderboard .b-scores {
-
     text-transform: none;
     height: 200px;
     min-height: 110px;
     font-size: 1rem;
     overflow-y: auto;
     overflow-x: hidden;
-    left: -50%;
 }
 
 #top3 {
@@ -66,30 +76,27 @@
 
 .b-scores .col {
     flex: 1;
-
 }
 
 
 .b-scores .underline {
-    border-bottom: 1px solid #97c2b2;
+    border-bottom: 1px solid rgba(201, 97, 37, 0.4);
 }
 
 .b-scores .text-start {
     text-align: start;
     margin-top: 10px;
     margin-bottom: 2.5px;
-    margin-left: 25px;
-    color: #3c8056;
     font-family: Prompt;
+    margin-left: 10px;
 }
 
 .b-scores .text-end {
     text-align: end;
     margin-top: 10px;
     margin-bottom: 2.5px;
-    margin-right: 25px;
-    color: #3c8056;
     font-family: Prompt;
+    margin-right: 10px;
 }
 
 .input {
@@ -97,7 +104,6 @@
     width: 9em;
     height: 1.6em;
     padding-left: 0.5em;
-    /* padding-top: 0px; */
     outline: none;
     overflow: hidden;
     background-color: #F3F3F3;

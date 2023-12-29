@@ -1,11 +1,10 @@
 const FullScreen = function (fullscreen_id_selector) {
     const fullscreen_element = document.getElementById(fullscreen_id_selector)
-    fullscreen_element.innerHTML = `<div id="screen-maximize" class="screen-icon"></div><div id="screen-minimize" class="screen-icon"></div>`
+    fullscreen_element.innerHTML = `<div class='fullscreen-icon maximize'></div>`
 
     const fullscreen = {
         element: document.documentElement,
-        icon_maximize: document.getElementById('screen-maximize'),
-        icon_minimize: document.getElementById('screen-minimize')
+        icon: document.querySelector('.fullscreen-icon')
     }
 
     fullscreen.openFullscreen = function () {
@@ -29,30 +28,22 @@ const FullScreen = function (fullscreen_id_selector) {
     }
 
     fullscreen.toggle = function () {
-        if (document.fullscreenElement)
+        if (document.fullscreenElement) {
             fullscreen.closeFullscreen()
-        else
+        } else {
             fullscreen.openFullscreen()
+        }
+        fullscreen.draw_icon()
     }
 
-    fullscreen.icon_maximize.addEventListener('click', fullscreen.toggle)
-    fullscreen.icon_minimize.addEventListener('click', fullscreen.toggle)
+    fullscreen.icon.addEventListener('click', fullscreen.toggle)
 
     fullscreen.draw_icon = function () {
-        if (!document.fullscreenElement) {
-            fullscreen.icon_maximize.classList.remove('screen-icon-hide')
-            fullscreen.icon_minimize.classList.add('screen-icon-hide')
-        } else {
-            fullscreen.icon_maximize.classList.add('screen-icon-hide')
-            fullscreen.icon_minimize.classList.remove('screen-icon-hide')
-        }
+        fullscreen.icon.classList.remove('maximize')
+        if (document.fullscreenElement)
+            fullscreen.icon.classList.add('maximize')
     }
 
-    fullscreen.element.addEventListener('fullscreenchange', () => {
-        fullscreen.draw_icon()
-    })
-
-    fullscreen.draw_icon()
 
     return fullscreen
 }
