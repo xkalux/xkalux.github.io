@@ -14,13 +14,11 @@ if (is_back_forward) {
     }
 }
 
-document.getElementById('start-game-btn').addEventListener('click', () => {
-    if (!isStart) {
-        isStart = true
-        clearScoreBoard()
-        replay()
-        document.getElementById('start-game-btn').style.display = 'none'
-        fullscreen.openFullscreen()
-        fullscreen.draw_icon()
-    }
+score_board.loadScoreBoard(false)
+document.getElementById('start-game').addEventListener('click', () => {
+    clearScoreBoard()
+    replay()
+    document.getElementById('start-game-btn').style.display = 'none'
+    fullscreen.openFullscreen()
+    fullscreen.draw_icon()
 })

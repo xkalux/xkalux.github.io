@@ -6,16 +6,16 @@
 }
 
 .fullscreen-icon {
+    cursor: pointer;
     width: 32px;
     height: 32px;
     transform: rotateX(0deg) translateY(0);
-
     background-color: #00A77D;
     -webkit-mask-image: url('./../../src/images/screen-minimize.svg');
     mask-image: url('./../../src/images/screen-minimize.svg');
+    -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     transition: transform 0.2s;
-
     opacity: 0.7;
 }
 

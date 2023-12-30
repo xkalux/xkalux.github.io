@@ -4,20 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FT5W2F0LS4"></script>
-    <script>
-        window.dataLayer = window.dataLayer || []
-        function gtag() { dataLayer.push(arguments) }
-        gtag('js', new Date())
-
-        gtag('config', 'G-FT5W2F0LS4');
-    </script>
-
+    <meta name="description" content="Assets and Helper, X class">
     <title>Class X {&nbsp;.&nbsp;.&nbsp;.&nbsp;}</title>
     <link rel="icon" type="image/png" href="./src/images/terminal.png" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Prompt:ital,wght@1,200&family=Share+Tech+Mono&display=swap&family=Prompt&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Prompt&family=Voltaire&display=swap');
     </style>
     <link rel="stylesheet" href="./src/styles/reset.min.css">
     <link rel="stylesheet" href="./src/styles/rabbit-style.css">
@@ -30,6 +21,15 @@
 </head>
 
 <body>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FT5W2F0LS4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || []
+        function gtag() { dataLayer.push(arguments) }
+        gtag('js', new Date())
+
+        gtag('config', 'G-FT5W2F0LS4');
+    </script>
 
     <div id="world">
 
@@ -56,14 +56,15 @@
                     loader</a></p>
         </div>
 
-        <div id="start-game" class="Button Button--start"><button id="start-game-btn"><span>Play</span></button>
+        <div id="start-game" class="Button Button--start">
+            <button type="button" title="game-start-button" id="start-game-btn"><span>Play</span></button>
         </div>
     </div>
 
     <section class="material-design-hamburger-wrapper">
 
         <section class="material-design-hamburger" id="hamburger-icon">
-            <button class="material-design-hamburger__icon">
+            <button type="button" title="hamberger-icon" class="material-design-hamburger__icon">
                 <span class="material-design-hamburger__layer"></span>
             </button>
         </section>
@@ -125,7 +126,7 @@
     <script src="./src/scripts/loading.js"></script>
     <script src="./src/scripts/three.min.js"></script>
     <script src="./src/scripts/TweenMax.min.js"></script>
-    <script src="./src/scripts/OrbitControls.js"></script>
+    <script src="./src/scripts/OrbitControls.min.js"></script>
     <script src="./src/scripts/rabbit-script.js"></script>
     <script src="./src/scripts/audio.js"></script>
     <script src="./src/scripts/score-board.js"></script>

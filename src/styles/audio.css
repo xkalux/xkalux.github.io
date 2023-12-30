@@ -10,10 +10,11 @@
     width: 40px;
     height: 40px;
     cursor: pointer;
-    mask-repeat: no-repeat;
     background-color: #457b9d;
     -webkit-mask-image: url('./../../src/images/audio-on.svg');
     mask-image: url('./../../src/images/audio-on.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
     transition: transform 0.2s;
     transform: rotateX(0deg) rotateZ(0deg);
 

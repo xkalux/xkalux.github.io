@@ -7,15 +7,16 @@ var scene,
   container,
   controls,
   clock
+var bonusCount = 0
 var delta = 0
 var floorRadius = 200
 var speed = 6
 var distance = 0
 var level = 1
 var levelInterval
-var levelUpdateFreq = 3000
+var levelUpdateFreq = 7000//3000
 var initSpeed = 5
-var maxSpeed = 48
+var maxSpeed = 28 //48
 var monsterPos = .65
 var monsterPosTarget = .65
 var floorRotation = 0
@@ -28,8 +29,6 @@ var monsterAcceleration = 0.004
 var malusClearColor = 0xb44b39
 var malusClearAlpha = 0
 var fieldGameOver, fieldDistance
-
-var isStart = false
 
 //SCREEN & MOUSE VARIABLES
 
@@ -1025,7 +1024,7 @@ function updateMonsterPosition() {
 }
 
 function firstStart() {
-  gameStatus = "gameOver"
+  gameStatus = "readyToReplay"
   monster.sit()
   hero.hang()
   monster.heroHolder.add(hero.mesh)
@@ -1196,13 +1195,16 @@ function checkCollision() {
 }
 
 function getBonus() {
+  bonusCount++
   bonusParticles.mesh.position.copy(carrot.mesh.position)
   bonusParticles.mesh.visible = true
   bonusParticles.explose()
   carrot.angle += Math.PI / 2
-  //speed*=.95;
-  monsterPosTarget += .025
+  speed -= bonusCount * .1
 
+  monsterPosTarget += bonusCount * 0.025 //0.025
+  if (monsterPosTarget > 0.71)
+    monsterPosTarget = 0.71
 }
 
 function getMalus() {
@@ -1224,7 +1226,7 @@ function getMalus() {
     }
   })
   //
-  monsterPosTarget -= .04
+  monsterPosTarget -= .025 //.04
   TweenMax.from(this, .5, {
     malusClearAlpha: .5, onUpdate: function () {
       renderer.setClearColor(malusClearColor, malusClearAlpha)
@@ -1239,27 +1241,29 @@ function updateDistance() {
 }
 
 function updateLevel() {
+  // console.log(`lv: ${level}, speed: ${speed}`)
   if (speed >= maxSpeed) return
   level++
   speed += 2
 }
 
 function loop() {
-  delta = clock.getDelta()
-  updateFloorRotation()
+  if (gameStatus !== "preparingToReplay") {
+    delta = clock.getDelta()
+    updateFloorRotation()
 
-  if (gameStatus == "play") {
-
-    if (hero.status == "running") {
-      hero.run()
+    if (gameStatus == "play") {
+      if (hero.status == "running") {
+        // console.log(`monsterPosTarget: ${monsterPosTarget}`)
+        hero.run()
+      }
+      updateDistance()
+      updateMonsterPosition()
+      updateCarrotPosition()
+      updateObstaclePosition()
+      checkCollision()
     }
-    updateDistance()
-    updateMonsterPosition()
-    updateCarrotPosition()
-    updateObstaclePosition()
-    checkCollision()
   }
-
   render()
   requestAnimationFrame(loop)
 }
@@ -1279,10 +1283,16 @@ function init(event) {
   createBonusParticles()
   createObstacle()
   initUI()
-  resetGame()
+
+  gameStatus = "preparingToReplay"
+  monster.sit()
+  hero.hang()
+  monster.heroHolder.add(hero.mesh)
+  TweenMax.to(this, 1, { speed: 0 })
+  TweenMax.to(camera.position, 3, { z: cameraPosGameOver, y: 60, x: -30 })
+  carrot.mesh.visible = false
+  obstacle.mesh.visible = false
   loop()
-  if (!isStart)
-    firstStart()//
 }
 
 function resetGame() {
@@ -1302,8 +1312,7 @@ function resetGame() {
   gameStatus = "play"
   hero.status = "running"
   hero.nod()
-  // audio.play()
-  updateLevel()
+  // updateLevel()
   levelInterval = setInterval(updateLevel, levelUpdateFreq)
 }
 

@@ -9,7 +9,7 @@
 
 #leaderboard {
     position: absolute;
-    top: 23%;
+    top: 17%;
     width: 100vw;
     font-size: 1.2rem;
     font-family: Prompt;
@@ -25,16 +25,19 @@
 }
 
 #leaderboard .score-board-action {
+    margin-top: 20px;
     text-align: center;
 }
 
 #leaderboard .title {
-    margin-left: 25%;
+    margin-left: 5%;
 }
 
 #leaderboard .b-scores {
+    padding-left: 50px;
+    padding-right: 50px;
     text-transform: none;
-    height: 200px;
+    height: 250px;
     min-height: 110px;
     font-size: 1rem;
     overflow-y: auto;
@@ -69,7 +72,16 @@
     margin-top: 5px;
 }
 
+.b-scores li.row:hover {
+    color: #fff;
+    cursor: default;
+    background-color: rgba(56, 148, 76, 0.5);
+    border-radius: 5px;
+    font-size: 1.1em;
+}
+
 .b-scores .row {
+    margin-top: 5px;
     display: flex;
     justify-content: space-between;
 }

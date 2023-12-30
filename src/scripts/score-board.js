@@ -1,6 +1,7 @@
 'use strict'
 
 const ScoreBoard = function (score_id_selector, scoreboard_id_selector, fn_replay = () => { }, maxKeepScore = 20) {
+    const seed = 'W3sibmFtZSI6IlhrYWx1eCIsInNjb3JlIjo5OTk5fV0='
     const storage = 'local-data'
     const score_element = document.getElementById(score_id_selector)
     const score_board_element = document.getElementById(scoreboard_id_selector)
@@ -32,11 +33,12 @@ const ScoreBoard = function (score_id_selector, scoreboard_id_selector, fn_repla
         if (score_board.player_name !== '') {
             if (score > 0 && typeof (Storage) !== "undefined") {
                 let scores = score_board.loadScore()
-                const player = scores.filter(e => e.name === score_board.player_name.toLowerCase().trim())[0]
-                if (typeof player !== 'undefined') {
+                const name = score_board.player_name.toLowerCase().trim()
+                const player = scores.filter(e => e.name === name)[0]
+                if (player !== undefined) {
                     if (score > player.score)
                         scores.map(e => {
-                            if (e.name === score_board.player_name)
+                            if (e.name === name)
                                 e.score = score
                             else
                                 e.score
@@ -57,15 +59,16 @@ const ScoreBoard = function (score_id_selector, scoreboard_id_selector, fn_repla
 
     score_board.loadScore = function () {
         top3_element.classList.add('hide-board')
-        let scores = [{ name: 'Xkalux', score: 9999 }]
+        let scores = []
         if (typeof (Storage) !== "undefined") {
             if (typeof localStorage[storage] !== 'undefined') {
                 try {
                     scores = JSON.parse(atob(localStorage[storage]))
                 } catch (error) {
-                    console.log('invalid local data')
                     localStorage.clear()
                 }
+            } else {
+                scores = JSON.parse(atob(seed))
             }
         }
         scores.sort(function (a, b) { return b.score - a.score })
@@ -76,7 +79,7 @@ const ScoreBoard = function (score_id_selector, scoreboard_id_selector, fn_repla
     score_board.loadTop3 = function () {
         const scores = score_board.loadScore()
         const length = scores.length > 3 ? 3 : scores.length
-        let html = `Top 3 : Players
+        let html = `Top Players
         <div id="top3-list">`
         for (let i = 0; i < length; i++) {
             const icon = i === 0 ? score_board.icon_trophy : score_board.icon_medal
@@ -93,9 +96,9 @@ const ScoreBoard = function (score_id_selector, scoreboard_id_selector, fn_repla
         var html = "<div class='board'><div class='title'>LeaderBoard</div><div><ol class=\"b-scores\">"
         for (var j = 0; j < scores.length; j++) {
             html += "<li class=\"row\">"
-            const _name = `<div class="col underline"><p class='text-start'>${scores[j].name}</p></div>`
-            const _score = `<div class="col underline"><p class='text-end'>${scores[j].score}</p></div>`
-            html += "<div class='col'></div>" + _name + _score + "<div class='col'></div><\/li>"
+            const _name = `<div class="col underline"><p class='text-start'>${j + 1} : ${scores[j].name}</p></div>`
+            const _score = `<div class="col underline"><p class='text-end'>${scores[j].score.toLocaleString('en-US')} m.</p></div>`
+            html += "" + _name + _score + "<\/li>"
         }
         html += "<\/ol><div></div>"
 
@@ -104,7 +107,7 @@ const ScoreBoard = function (score_id_selector, scoreboard_id_selector, fn_repla
             <input class="input" maxlength="8" onchange="score_board.SaveName(this)" autofocus="autofocus" placeholder="Enter your name" type="text">
             <button class="button" onclick="score_board.SaveScore()">Save/Restart</button>
             </div>`
-        // document.querySelector('#leaderboard').innerHTML = html
+
         leaderboard.innerHTML = html
     }
 
