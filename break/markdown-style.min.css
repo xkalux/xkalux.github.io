@@ -1,0 +1,19 @@
+textarea {
+  background: none;
+  border: 0;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  width: 100%
+}
+
+.CodeMirror {
+  margin-top: 20px;
+  height: 95vh;
+  font-size: 1.7em;
+  background-color: #b5c5c5
+}
+
+.CodeMirror-readonly .CodeMirror-cursor {
+  display: none
+}

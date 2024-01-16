@@ -2,134 +2,85 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Assets and Helper, X class">
     <title>Class X {&nbsp;.&nbsp;.&nbsp;.&nbsp;}</title>
-    <link rel="icon" type="image/png" href="./src/images/terminal.png" />
+    <link rel="icon" type="image/png" href="./src/img/terminal.png" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Prompt&family=Voltaire&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Fira+Sans+Condensed&family=IBM+Plex+Sans+Thai&family=IBM+Plex+Sans+Thai+Looped&family=JetBrains+Mono&family=Kanit&family=Krub&family=Niramit&family=Pattaya&family=Prompt&family=Sarabun&family=VT323&display=swap');
     </style>
-    <link rel="stylesheet" href="./src/styles/reset.min.css">
-    <link rel="stylesheet" href="./src/styles/rabbit-style.css">
-    <link rel="stylesheet" href="./src/styles/material-design-hamburger.css">
-    <link rel="stylesheet" href="./src/styles/loading.css">
-    <link rel="stylesheet" href="./src/styles/audio.css">
-    <link rel="stylesheet" href="./src/styles/fullscreen.css">
-    <link rel="stylesheet" href="./src/styles/score-board.css">
-    <link rel="stylesheet" href="./src/styles/style.css">
+
+    <script src="https://accounts.google.com/gsi/client" async></script>
+
+    <link rel="stylesheet" href="./src/css/jquery.terminal-2.37.2.min.css">
+
+    <link rel="stylesheet" href="./src/elements/x-elements.css">
+    <link rel="stylesheet" href="./src/css/main.css">
+    <link rel="stylesheet" href="./src/css/solar-style.min.css">
+    <link rel="stylesheet" href="./src/css/tetris.css">
+
+    <script src="./src/elements/x-window.min.js"></script>
+    <script src="./src/elements/x-shortcut.min.js"></script>
+    <script src="./src/elements/x-loading.min.js"></script>
 </head>
 
 <body>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FT5W2F0LS4"></script>
-    <script>
-        window.dataLayer = window.dataLayer || []
-        function gtag() { dataLayer.push(arguments) }
-        gtag('js', new Date())
-
-        gtag('config', 'G-FT5W2F0LS4');
-    </script>
-
-    <div id="world">
-
-        <div class="audio" id="game-audio"></div>
-
-        <div id="score-board"></div>
-        <div id="fullscreen"></div>
-
-        <div id="gameoverInstructions">
-            Game Over
+    <div class='solar-syst'>
+        <div class='sun'></div>
+        <div class='mercury'></div>
+        <div class='venus'></div>
+        <div class='earth'></div>
+        <div class='mars'></div>
+        <div class='jupiter'></div>
+        <div class='saturn'></div>
+        <div class='uranus'></div>
+        <div class='neptune'></div>
+        <div class='pluto'></div>
+        <div class='asteroids-belt'></div>
+    </div>
+    <div id="desktop">
+        <!-- user -->
+        <div id="user">
+            <div class="picture user-guest"></div>
+            <div class="profile">
+                <div class="title">Guest</div>
+                <div class="sub-title">sing-in</div>
+            </div>
         </div>
-        <div id="dist">
-            <div class="label">distance</div>
-            <div id="distValue">000</div>
+        <div id="tetris-panel">
+            <div id="panel-display">
+                <div id="panel-title">[ tetris ]</div>
+                <div id="action">Play</div>
+                <div id="panel-sub-title">The game score is saved on sign-in.</div>
+            </div>
+            <div id="score-board" class="">
+                <div class="title">Tetris Scoreboard</div>
+                <div class="score-list">
+
+                </div>
+            </div>
+        </div>
+        <div id="tetris" class="on-pause">
+
+            <div id="info">
+                <div id="score" class="text"></div>
+                <div id="next" class="text"></div>
+            </div>
+            <div id="output" class="text"></div>
+            <div id="instructions" class="text"><br />
+                <b>[Key Commands]</b>
+                Move Shape: [Arrow Keys]<br />
+                Rotate Shape: [Up Arrow]<br />
+                Drop Shape: [Down Arrow]<br />
+                Pause / Resume: [Space Bar]<br />
+            </div>
         </div>
 
-        <div id="instructions">
-            Click/Space to jump
-            <span class="lightInstructions"> — Grab the carrots / avoid the hedgehogs</span>
-        </div>
-        <div id="credits">
-            <p>credits: <a href="https://codepen.io/Yakudoo/pen/YGxYej" target="blank">The frantic run of the valorous
-                    rabbit</a> | <a href="https://codepen.io/redlabor/pen/nzwPGv" target="blank">Pushing pixels css
-                    loader</a></p>
-        </div>
-
-        <div id="start-game" class="Button Button--start">
-            <button type="button" title="game-start-button" id="start-game-btn"><span>Play</span></button>
-        </div>
+        <x-loading title="X Class {...}" id="loadingFirstScreen"></x-loading>
     </div>
 
-    <section class="material-design-hamburger-wrapper">
-
-        <section class="material-design-hamburger" id="hamburger-icon">
-            <button type="button" title="hamberger-icon" class="material-design-hamburger__icon">
-                <span class="material-design-hamburger__layer"></span>
-            </button>
-        </section>
-
-        <section class="menu menu--off" id="hamburger-menu">
-            <div>
-                Slides {
-                <ul>
-                    <li>
-                        <a class="dropdown-item" href="https://xkalux.github.io/slidev/datastructures_and_algorithms/">
-                            DataStructures and Algorithms</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="https://xkalux.github.io/slidev/dotnet_and_angular/">
-                            Internet Programming</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item"
-                            href="https://drive.google.com/drive/folders/1IkSTdjWErZN-pTB_YMq-Xl1yEn8PDvjf?usp=sharing">
-                            2D Game in Unity (Basic)</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item"
-                            href="https://drive.google.com/drive/folders/1Mq3zef_Xbq2rQeoDSvZz6w8wdN_JhCzX?usp=sharing">
-                            Programming in Go (Basic)</a>
-                    </li>
-                </ul>
-                }
-            </div>
-
-            <div>
-                Help {
-                <ul>
-                    <li><a class="dropdown-item"
-                            href="https://script.google.com/a/macros/rmuti.ac.th/s/AKfycbylF7u6F1otwbuJH78ldd98f0qGS1RFMeeiyyEktX6ZQMAHFjaGWNttRG6YD4rlm54V/exec">
-                            Check Score</a></li>
-
-                    <li><a class="dropdown-item"
-                            href="https://drive.google.com/drive/folders/1Dina0y2vt5lFC1TOPxaMRx-DUqG7i3RI?usp=sharing">
-                            Class Assets</a></li>
-
-                    <li><a class="dropdown-item"
-                            href="https://docs.google.com/forms/d/e/1FAIpQLSfDsL5-IAHCXUr8N20yHxk83vRX5smW_kXNtLex0VT1brzVNw/viewform">
-                            Class Register</a></li>
-                </ul>
-                }
-            </div>
-            <div>
-                <a href="./break/"> Break :/</a>
-            </div>
-            <div></div>
-        </section>
-
-    </section>
-
-    <div id="loading" class="loading text-center loading--hide"></div>
-
-    <script src="./src/scripts/material-design-hamburger.js"></script>
-    <script src="./src/scripts/loading.js"></script>
-    <script src="./src/scripts/three.min.js"></script>
-    <script src="./src/scripts/TweenMax.min.js"></script>
-    <script src="./src/scripts/OrbitControls.min.js"></script>
-    <script src="./src/scripts/rabbit-script.js"></script>
-    <script src="./src/scripts/audio.js"></script>
-    <script src="./src/scripts/score-board.js"></script>
-    <script src="./src/scripts/fullscreen.js"></script>
-    <script src="./script.js"></script>
+    <script src="./src/js/main.min.js" type="module"></script>
 </body>
+
+</html>
