@@ -31,6 +31,12 @@
     --body-font-family: 'Prompt'
 }
 
+/* #google-account {
+    position: absolute;
+    top: 4%;
+    right: 2%;
+    z-index: 9999;
+} */
 
 body {
     /* border: 1px solid #31dbd3; */
