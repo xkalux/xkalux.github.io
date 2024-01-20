@@ -2,90 +2,81 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Assets and Helper, X class">
-    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
-    <title>Class X {&nbsp;.&nbsp;.&nbsp;.&nbsp;}</title>
-    <link rel="icon" type="image/png" href="./src/img/terminal.png" />
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Fira+Sans+Condensed&family=IBM+Plex+Sans+Thai&family=IBM+Plex+Sans+Thai+Looped&family=JetBrains+Mono&family=Kanit&family=Krub&family=Niramit&family=Pattaya&family=Prompt&family=Sarabun&family=VT323&display=swap');
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Assets and Helper, X class">
 
-    <script src="https://accounts.google.com/gsi/client" async></script>
+  <script src="https://accounts.google.com/gsi/client" async></script>
+  <script src="./web_src/js/index.js" type="module"></script>
+  <script src="./web_src/js/nintendo-gamewatch.min.js" type="module"></script>
+  <script src="./web_src/js/x-construct.js" type="module"></script>
+  <script src="./web_src/js/x-loading.js" type="module"></script>
 
-    <link rel="stylesheet" href="./src/css/jquery.terminal-2.37.2.min.css">
-
-    <link rel="stylesheet" href="./src/elements/x-elements.css">
-    <link rel="stylesheet" href="./src/css/main.css">
-    <link rel="stylesheet" href="./src/css/solar-style.min.css">
-    <link rel="stylesheet" href="./src/css/tetris.css">
-
-    <script src="./src/elements/x-window.min.js"></script>
-    <script src="./src/elements/x-shortcut.min.js"></script>
-    <script src="./src/elements/x-loading.min.js"></script>
+  <link rel="stylesheet" href="./web_src/css/index.css">
+  <link rel="stylesheet" href="./web_src/css/login.css">
+  <link rel="stylesheet" href="./web_src/css/profile.css">
+  <link rel="stylesheet" href="./web_src/css/tetris.css">
+  <title>Class X { ... }</title>
+  <link rel="icon" type="image/png" href="./src/img/terminal.png" />
 </head>
 
 <body>
-    <!-- <div id="google-account">x</div> -->
-    <div class='solar-syst'>
-        <div class='sun'></div>
-        <div class='mercury'></div>
-        <div class='venus'></div>
-        <div class='earth'></div>
-        <div class='mars'></div>
-        <div class='jupiter'></div>
-        <div class='saturn'></div>
-        <div class='uranus'></div>
-        <div class='neptune'></div>
-        <div class='pluto'></div>
-        <div class='asteroids-belt'></div>
-    </div>
-    <div id="desktop">
-        <!-- user -->
+  <div id="account-panel">
 
-        <div id="user">
-            <div class="picture"></div>
-            <div class="profile">
-                <div class="title">Guest</div>
-                <div class="sub-title">
-                    <div id="google-account"></div>
-                </div>
-            </div>
-        </div>
-        <div id="tetris-panel">
-            <div id="panel-display">
-                <div id="panel-title">[ tetris ]</div>
-                <div id="action">Play</div>
-                <div id="panel-sub-title">The score is saved on sign-in.</div>
-            </div>
-            <div id="score-board" class="">
-                <div class="title">Tetris Scoreboard</div>
-                <div class="score-list">
+  </div>
+  <div id="Hello-World">Hello World</div>
+  <article id="game" class="ui-page">
+    <div id="tetris"></div>
+  </article>
+  <article id="slides" class="ui-page">
+    <h2>Slides</h2>
+  </article>
+  <article id="terminal" class="ui-page">
+    <h2>Terminal</h2>
+    <x-construct></x-construct>
+  </article>
+  <article id="info" class="ui-page">
+    <h2>Credit</h2>
+    <ul>
+      <li>
+        <p><a href="https://codepen.io/manz/pen/VwRPLEv" target="_blank">CodePen Home Nintendo Game & Watch with Pure
+            CSS (WebComponents)</a></p>
+      </li>
 
-                </div>
-            </div>
-        </div>
-        <div id="tetris" class="on-pause">
+      <li>
+        <p><a href="https://www.svgrepo.com/" target="_blank">Open-licensed SVG Vector and Icons</a></p>
+      </li>
+      <li>
+        <p><a href="https://codepen.io/stoumann/pen/WNLjodZ" target="_blank">Dock Navbar</a></p>
+      </li>
+      <li>
+        <p><a href="https://codepen.io/teemujvi/pen/eGzqvy" target="_blank">Tetris AI</a></p>
+      </li>
 
-            <div id="info">
-                <div id="score" class="text"></div>
-                <div id="next" class="text"></div>
-            </div>
-            <div id="output" class="text"></div>
-            <div id="instructions" class="text"><br />
-                <b>[Key Commands]</b>
-                Move Shape: [Arrow Keys]<br />
-                Rotate Shape: [Up Arrow]<br />
-                Drop Shape: [Down Arrow]<br />
-                Pause / Resume: [Space Bar]<br />
-            </div>
-        </div>
+    </ul>
+  </article>
+  <article id="profile" class="ui-page">
+    <h2>Profile</h2>
+  </article>
 
-        <x-loading title="X Class {...}" id="loadingFirstScreen"></x-loading>
-    </div>
+  <nav class="ui-dock">
+    <a href="#game">
+      <img src="./web_src/svg/tetris.svg" alt="Tetris">
+    </a>
+    <a href="#slides" id="nav-slides">
+      <img src="./web_src/svg/file.svg" alt="Slides">
+    </a>
+    <a href="#profile" id="nav-profile">
+      <img src="./web_src/svg/user-account-profile.svg" alt="Profile">
+    </a>
+    <a href="#terminal">
+      <img src="./web_src/svg/terminal.svg" alt="terminal">
+    </a>
+    <a href="#info">
+      <img src="./web_src/svg/copyright.svg" alt="credit">
+    </a>
 
-    <script src="./src/js/main.min.js" type="module"></script>
+  </nav>
 </body>
 
 </html>

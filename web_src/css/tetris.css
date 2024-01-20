@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+:root {
+    --tetris-game-font-0-color: #ffffff3a;
+    --tetris-game-font-1-color: #1e96fc;
+    --tetris-game-font-2-color: #60b6fb;
+    --tetris-game-font-3-color: #a2d6f9;
+    --tetris-game-font-4-color: #cfe57d;
+    --tetris-game-font-5-color: #fcf300;
+    --tetris-game-font-6-color: #fedd00;
+    --tetris-game-font-7-color: #ffc600;
+    --tetris-game-font-8-color: #ffcb17;
+    --tetris-game-font-9-color: #f72585;
+
+    --tetris-on-pause-color: #9f9f9f7c;
+}
+
+nintendo-game-watch {
+    user-select: none;
+}
+
+
+#tetris-game {
+    padding-top: 0.1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    & nintendo-game-watch {
+        color: #fff;
+    }
+}

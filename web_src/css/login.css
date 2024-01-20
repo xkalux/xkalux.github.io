@@ -1,0 +1,57 @@
+#account-panel {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+}
+
+.log-out-icon {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & :is(span) {
+        display: none;
+        margin-right: 0.5em;
+        color: #fff;
+        font-weight: 600;
+        font-size: 1.5rem;
+    }
+
+    &:hover {
+        & :is(span) {
+            display: block;
+        }
+
+        & :is(path) {
+            &:nth-of-type(1) {
+                fill: #FFF;
+            }
+
+            &:nth-of-type(2) {
+                stroke: #FFF;
+                stroke-width: 4;
+            }
+
+        }
+    }
+}
+
+#Hello-World {
+    position: absolute;
+    top: 45%;
+    width: 100%;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.google-picture {
+    position: relative;
+    width: 3em;
+    left: -0.39em;
+    top: -0.4em;
+    border-radius: 0.65em;
+    border: 4px solid #ffffffe0;
+    right: 0px;
+    bottom: 0px;
+}
