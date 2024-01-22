@@ -7,7 +7,7 @@ import { renderTetris } from "./tetris.min.js"
 import { initTetris } from "./tetris-game.min.js"
 window.onload = async () => {
 
-    const xclassAPI = new xClassAPI('AKfycbze7_2ulvGRaT4Mb_BMrUPzNRwTLa_TvWiOfTdqGqM6mz5Nf2ZIwZbW0P5gIuhcvDi77g')
+    const xclassAPI = new xClassAPI('AKfycbzD5mdDyJx7_XNRmGR16BAfAL_YECCmrczGCcvBmecQLr0x78WvkqCQnpslRMaNIqY3')
 
     handleLogin(initGoogleIdentity, isLogin, getProfile)
 
