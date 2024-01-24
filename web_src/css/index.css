@@ -55,7 +55,7 @@ li {
   display: none;
   font-size: clamp(1.0625rem, 0.8839rem + 0.5714vw, 1.3125rem);
   grid-area: 1 / -1;
-  padding: 2ch;
+  padding-top: 2ch;
 
   &:target {
     display: block;
@@ -118,7 +118,7 @@ li {
 }
 
 #slides {
-  background-image: linear-gradient(117deg, hsl(161, 43%, 47%), hsla(161, 43%, 47%, 0.74));
+  background-image: linear-gradient(117deg, hsl(161, 43%, 47%), hsla(161, 43%, 47%, 0.842));
 
   &:target~.ui-dock a[href="#slides"]::after {
     background: #000;
@@ -191,6 +191,10 @@ li {
     }
 
   }
+}
+
+.ui-dock.hide {
+  display: none;
 }
 
 [href="#game"] {
