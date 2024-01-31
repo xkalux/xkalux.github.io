@@ -142,7 +142,7 @@ li {
 }
 
 #profile {
-  background-image: linear-gradient(117deg, #0096c7, #0095c78c);
+  background-image: linear-gradient(117deg, #0096c7, #0095c7);
 
   &:target~.ui-dock a[href="#profile"]::after {
     background: #000;
