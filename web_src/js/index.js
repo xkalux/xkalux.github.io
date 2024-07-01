@@ -5,6 +5,7 @@ import { xClassAPI } from "./class-api.min.js"
 import { handleLogin } from "./login.min.js"
 import { renderTetris } from "./tetris.min.js"
 import { initTetris } from "./tetris-game.min.js"
+import { renderActions } from "./actions.min.js"
 window.onload = async () => {
 
     const xclassAPI = new xClassAPI('AKfycbwxPhmTvnrcWKF5lE9LHtzMMmjregvcn_0onZpnaKhwx-YlxVmev356s3l5pP9_5_ehfw')
@@ -12,6 +13,8 @@ window.onload = async () => {
     handleLogin(initGoogleIdentity, isLogin, getProfile)
 
     renderTetris(xclassAPI, document.querySelector('#tetris'), getProfile, initTetris)
+
+    renderActions(document.querySelector('#actions-element'))
 
     const profile = document.querySelector('#nav-profile')
     function loadsubject() {

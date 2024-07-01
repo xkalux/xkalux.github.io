@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Jost:wght@600&display=swap');
 
 *,
 *::before,
@@ -125,10 +125,11 @@ li {
   }
 }
 
-#terminal {
-  background-image: linear-gradient(117deg, #84a98c, #84a98ca1);
+#actions {
+  /* background-image: linear-gradient(117deg, #84a98c, #84a98ca1); */
+  background: radial-gradient(ellipse at bottom, #1c2837 0, #050608 100%);
 
-  &:target~.ui-dock a[href="#terminal"]::after {
+  &:target~.ui-dock a[href="#actions"]::after {
     background: #000;
   }
 }
@@ -142,7 +143,7 @@ li {
 }
 
 #profile {
-  background-image: linear-gradient(117deg, #0096c7, #0095c7);
+  background-image: linear-gradient(117deg, #0096c7, #0095c78c);
 
   &:target~.ui-dock a[href="#profile"]::after {
     background: #000;
@@ -150,6 +151,7 @@ li {
 }
 
 .ui-dock {
+  z-index: 999999;
   backdrop-filter: blur(10px);
   background-color: rgba(255, 255, 255, .45);
   border-radius: 0.75em;
@@ -205,7 +207,7 @@ li {
   background-color: #65BDA1;
 }
 
-[href="#terminal"] {
+[href="#actions"] {
   background-color: #84a98c;
 }
 
