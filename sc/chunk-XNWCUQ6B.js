@@ -1,0 +1,1 @@
+import{Hb as m,Lb as i,ea as o,nb as n,ob as a}from"./chunk-UCZ3HUK4.js";var p=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=o({type:t,selectors:[["app-home"]],standalone:!0,features:[i],decls:2,vars:0,template:function(e,r){e&1&&(n(0,"p"),m(1,"Invalid Route"),a())}})};export{p as HomeComponent};
