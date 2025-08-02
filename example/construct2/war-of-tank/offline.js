@@ -1,0 +1,29 @@
+﻿{
+	"version": 1754121104,
+	"fileList": [
+		"data.js",
+		"c2runtime.js",
+		"jquery-3.4.1.min.js",
+		"offlineClient.js",
+		"images/body_red_-sheet0.png",
+		"images/basic_red-sheet0.png",
+		"images/playerturret-sheet0.png",
+		"images/player-sheet0.png",
+		"images/bullet-sheet0.png",
+		"images/wall-sheet0.png",
+		"images/explosion.png",
+		"media/explosion-08.ogg",
+		"media/explosion-21.ogg",
+		"media/music_stage01.ogg",
+		"icon-16.png",
+		"icon-32.png",
+		"icon-114.png",
+		"icon-128.png",
+		"icon-256.png",
+		"loading-logo.png",
+		"c2mp-net.js",
+		"c2mp-peer.js",
+		"c2mp.js",
+		"waker.js"
+	]
+}
