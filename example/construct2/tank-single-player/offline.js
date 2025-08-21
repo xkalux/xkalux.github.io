@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1754638303,
+	"version": 1755755542,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -18,6 +18,12 @@
 		"images/health_bar.png",
 		"images/health_bar_decoration-sheet0.png",
 		"images/enemy_health_bar.png",
+		"images/lefttstickbase-sheet0.png",
+		"images/lefttstick-sheet0.png",
+		"images/playpause-sheet0.png",
+		"images/playpause-sheet1.png",
+		"images/righttstickbase-sheet0.png",
+		"images/bullet_icon-sheet0.png",
 		"media/explosion-08.ogg",
 		"media/explosion-21.ogg",
 		"media/music_stage01.ogg",
