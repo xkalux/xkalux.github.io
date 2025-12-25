@@ -1,0 +1,1 @@
+button.svelte-x36n5k:after{content:"";position:absolute;left:0;bottom:0;height:0px;width:100%;margin-bottom:-10px;transition:height .1s ease;pointer-events:none}button[data-active=true].svelte-x36n5k:after{height:10px}
