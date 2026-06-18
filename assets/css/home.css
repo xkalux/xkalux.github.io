@@ -129,6 +129,7 @@ body {
 @media (max-width: 600px) {
     body {
         align-items: center;
+        flex-direction: column;
     }
 
     .logo {
@@ -151,5 +152,27 @@ body {
     .footer-links .separator {
         display: none;
         /* ซ่อนจุดไข่ปลาบนมือถือแล้วเปลี่ยนเป็นเรียงขึ้นบรรทัดใหม่แทน */
+    }
+}
+
+@media (max-width: 360px) {
+    .logo {
+        margin-top: 18vh;
+        margin-bottom: 10vh;
+        font-size: 52px;
+        gap: 3px;
+    }
+
+    .hero-x {
+        width: 44px;
+        height: 44px;
+    }
+
+    .app-purpose {
+        font-size: 11px;
+    }
+
+    .footer-links {
+        font-size: 11px;
     }
 }
